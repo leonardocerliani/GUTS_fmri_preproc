@@ -75,9 +75,7 @@ launch_octave_conversion() {
             if [ ! -d "${dest}" ]; then
                octave --no-gui --eval "addpath('${dicm2nii_path}'); dicm2nii('${orig}', '${dest}', ${fmt})"
             fi
-
-
-            
+ 
         done
     done
 
