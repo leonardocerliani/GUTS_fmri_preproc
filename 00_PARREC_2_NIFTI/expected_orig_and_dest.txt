@@ -1,3 +1,13 @@
+The data are too heavy to load on github. In case you want to set up a testbed for running 
+the script before working on the actual directories, here is how the directories should look
+like.
+
+simulat_data06 : how the orig dir with the PARREC should be structured
+raw_data : how the destination directory of the converted nifti should look like
+
+
+
+
 simulate_data06/
 ├── sub-035
 │   ├── ses-01
