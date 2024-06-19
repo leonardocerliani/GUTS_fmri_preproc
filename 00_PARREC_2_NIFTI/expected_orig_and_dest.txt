@@ -1,0 +1,101 @@
+simulate_data06/
+├── sub-035
+│   ├── ses-01
+│   │   ├── anat
+│   │   │   ├── sub-051_ses-01_WIP_Survey_1_1.PAR
+│   │   │   ├── sub-051_ses-01_WIP_Survey_1_1.REC
+│   │   │   ├── sub-051_ses-01_WIP_acq-3DTSE_T2w_6_1.PAR
+│   │   │   ├── sub-051_ses-01_WIP_acq-3DTSE_T2w_6_1.REC
+│   │   │   ├── sub-051_ses-01_WIP_acq-MPRAGE_T1w_5_1.PAR
+│   │   │   └── sub-051_ses-01_WIP_acq-MPRAGE_T1w_5_1.REC
+│   │   └── func
+│   │       ├── sub-051_ses-01_WIP_BOLD_EmoReg_run-01_2_1.PAR
+│   │       └── sub-051_ses-01_WIP_BOLD_EmoReg_run-01_2_1.REC
+│   └── ses-02
+│       └── func
+│           ├── sub-051_ses-02_WIP_BOLD_EmoReg_run-01_2_1.PAR
+│           └── sub-051_ses-02_WIP_BOLD_EmoReg_run-01_2_1.REC
+├── sub-051
+│   ├── ses-01
+│   │   ├── anat
+│   │   │   ├── sub-051_ses-01_WIP_Survey_1_1.PAR
+│   │   │   ├── sub-051_ses-01_WIP_Survey_1_1.REC
+│   │   │   ├── sub-051_ses-01_WIP_acq-3DTSE_T2w_6_1.PAR
+│   │   │   ├── sub-051_ses-01_WIP_acq-3DTSE_T2w_6_1.REC
+│   │   │   ├── sub-051_ses-01_WIP_acq-MPRAGE_T1w_5_1.PAR
+│   │   │   └── sub-051_ses-01_WIP_acq-MPRAGE_T1w_5_1.REC
+│   │   └── func
+│   │       ├── sub-051_ses-01_WIP_BOLD_EmoReg_run-01_2_1.PAR
+│   │       └── sub-051_ses-01_WIP_BOLD_EmoReg_run-01_2_1.REC
+│   └── ses-02
+│       └── func
+│           ├── sub-051_ses-02_WIP_BOLD_EmoReg_run-01_2_1.PAR
+│           └── sub-051_ses-02_WIP_BOLD_EmoReg_run-01_2_1.REC
+└── sub-089
+    ├── ses-01
+    │   ├── anat
+    │   │   ├── sub-051_ses-01_WIP_Survey_1_1.PAR
+    │   │   ├── sub-051_ses-01_WIP_Survey_1_1.REC
+    │   │   ├── sub-051_ses-01_WIP_acq-3DTSE_T2w_6_1.PAR
+    │   │   ├── sub-051_ses-01_WIP_acq-3DTSE_T2w_6_1.REC
+    │   │   ├── sub-051_ses-01_WIP_acq-MPRAGE_T1w_5_1.PAR
+    │   │   └── sub-051_ses-01_WIP_acq-MPRAGE_T1w_5_1.REC
+    │   └── func
+    │       ├── sub-051_ses-01_WIP_BOLD_EmoReg_run-01_2_1.PAR
+    │       └── sub-051_ses-01_WIP_BOLD_EmoReg_run-01_2_1.REC
+    └── ses-02
+        └── func
+            ├── sub-051_ses-02_WIP_BOLD_EmoReg_run-01_2_1.PAR
+            └── sub-051_ses-02_WIP_BOLD_EmoReg_run-01_2_1.REC
+
+
+
+
+
+
+
+raw_data/
+├── sub-035
+│   ├── ses-01
+│   │   ├── anat
+│   │   │   ├── dcmHeaders.mat
+│   │   │   ├── sub_051_ses_01_WIP_acq_3DTSE_T2w_6_1.nii.gz
+│   │   │   └── sub_051_ses_01_WIP_acq_MPRAGE_T1w_5_1.nii.gz
+│   │   └── func
+│   │       ├── dcmHeaders.mat
+│   │       └── sub_051_ses_01_WIP_BOLD_EmoReg_run_01_2_1.nii.gz
+│   └── ses-02
+│       ├── anat
+│       └── func
+│           ├── dcmHeaders.mat
+│           └── sub_051_ses_02_WIP_BOLD_EmoReg_run_01_2_1.nii.gz
+├── sub-051
+│   ├── ses-01
+│   │   ├── anat
+│   │   │   ├── dcmHeaders.mat
+│   │   │   ├── sub_051_ses_01_WIP_acq_3DTSE_T2w_6_1.nii.gz
+│   │   │   └── sub_051_ses_01_WIP_acq_MPRAGE_T1w_5_1.nii.gz
+│   │   └── func
+│   │       ├── dcmHeaders.mat
+│   │       └── sub_051_ses_01_WIP_BOLD_EmoReg_run_01_2_1.nii.gz
+│   └── ses-02
+│       ├── anat
+│       └── func
+│           ├── dcmHeaders.mat
+│           └── sub_051_ses_02_WIP_BOLD_EmoReg_run_01_2_1.nii.gz
+└── sub-089
+    ├── ses-01
+    │   ├── anat
+    │   │   ├── dcmHeaders.mat
+    │   │   ├── sub_051_ses_01_WIP_acq_3DTSE_T2w_6_1.nii.gz
+    │   │   └── sub_051_ses_01_WIP_acq_MPRAGE_T1w_5_1.nii.gz
+    │   └── func
+    │       ├── dcmHeaders.mat
+    │       └── sub_051_ses_01_WIP_BOLD_EmoReg_run_01_2_1.nii.gz
+    └── ses-02
+        ├── anat
+        └── func
+            ├── dcmHeaders.mat
+            └── sub_051_ses_02_WIP_BOLD_EmoReg_run_01_2_1.nii.gz
+
+21 directories, 21 files
