@@ -60,21 +60,21 @@ launch_octave_conversion() {
 
             orig=${orig_root}/sub-${sub}/ses-${ses}/${scan_type}
             dest=${dest_root}/sub-${sub}/ses-${ses}/${scan_type}
-            fmt=1   # 0 = .nii, 1 = .nii.gz - see all codes in dicm2nii.m
+            fmt=0   # 0 = .nii, 1 = .nii.gz - see all codes in dicm2nii.m
 
             # location of the dicm2nii folder containing dicm2nii.m
             dicm2nii_path=/data06/EmoReg/EmoReg/Methods_and_materials/dicm2nii
 
-            # # Destructive version : replaces every previous *dest* file/dir
-            # # NB : no *orig* folder are removed/replaced or otherwise modified in this
-            # [ -d ${dest} ] && rm -rf ${dest}
-            # mkdir -p ${dest}
-            # octave --no-gui --eval "addpath('${dicm2nii_path}'); dicm2nii('${orig}', '${dest}', ${fmt})"
+            # Destructive version : replaces every previous *dest* file/dir
+            # NB : no *orig* folder are removed/replaced or otherwise modified in this
+            [ -d ${dest} ] && rm -rf ${dest}
+            mkdir -p ${dest}
+            octave --no-gui --eval "addpath('${dicm2nii_path}'); dicm2nii('${orig}', '${dest}', ${fmt})"
  
-            # Incremental version : only converts files if anat/func do *NOT* exist yet
-            if [ ! -d "${dest}" ]; then
-               octave --no-gui --eval "addpath('${dicm2nii_path}'); dicm2nii('${orig}', '${dest}', ${fmt})"
-            fi
+            # # # Incremental version : only converts files if anat/func do *NOT* exist yet
+            # if [ ! -d ${dest} ]; then
+            #    octave --no-gui --eval "addpath('${dicm2nii_path}'); dicm2nii('${orig}', '${dest}', ${fmt})"
+            # fi
  
         done
     done
