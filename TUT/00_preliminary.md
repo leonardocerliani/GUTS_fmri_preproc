@@ -1,5 +1,8 @@
 # Preliminary information
 
+## basic intro to linux terminal
+- by [TechByCosta](https://www.youtube.com/watch?v=V_G2_uCE8ug)
+
 ## setting up your account to work with fsl
 I don't know whether we will really manage to make a tutorial. For the moment, this is (aims to be) a collection of short snippets for dealing with focused issues.
 
