@@ -1,0 +1,165 @@
+---
+title: "Papaya viz Nifti images"
+author: "LC"
+date: "2024-06-28"
+output:
+  html_document:
+    self_contained: true
+    code_folding: hide
+    highlight: pygments
+    theme: cerulean
+    css: styles.css
+---
+
+## Motivation
+When you work with neuroimaging, it is useful to be able to explore the images in a viewer. There are many great viewers, like MRIcroGL, ITK-SNAP or Mango, just to name a few. However if your images are on a remote server with no or limited desktop access, you cannot directly use these softwares. You will first have to download the images locally.
+
+Additionally, it's difficult to share a specific view of an images stack, such as an overlay of specific layers with specific thresholds, color tables and transparency.
+
+Fortunately a few years ago [John Muschelli made a widget for the Papaya JS viewer](https://github.com/muschellij2/papayaWidget), which allows to programmatically define all the aspects of the intended visualization (hereafter, viz). 
+
+What is really great is that when this papaya widget is used within an Rmarkdown notebook, the produced html page is self-contained and can be shared with anybody else. It contains one (or mode) full-fledged image browser in which you can then change color maps, thresholds, and even load new images.
+
+### Important note
+One of the very few limitations of the papayawidget is that if the code in the rendered HMTL is displayed, some tools of the papaya browser are not shown in the correct location. For this reason all the code is here hidden and can be reviewed either by expanding it (click on the top right button) or in the source `.Rmd` file.
+
+This should however not represent a big problem, since the primary use of this tool should be to share HTML pages with the image browser for interactive exploration, rather than the code that generates them.
+
+<br><br>
+
+## Libraries
+To use the [papayawidget](https://github.com/muschellij2/papayaWidget) you will need to have the `devtools` library and a nifti image loaded - in this case I chose [RNifti](https://github.com/jonclayden/RNifti). Of course you also need to install the widget.
+
+Below is the code to load these libraries and - commented - the code to install them if you don't have it yet.
+
+```{r, message=FALSE}
+# Libs and bd_results
+
+# install.packages("devtools")
+library(devtools)
+
+# install.packages("papayaWidget")
+# devtools::install_github("muschellij2/papayaWidget")
+library(papayaWidget)
+
+# remotes::install_github("jonclayden/RNifti")
+library(RNifti)
+
+# papaya widget github : https://github.com/muschellij2/papayaWidget
+# app code here: https://github.com/muschellij2/linked_viewer/blob/master/app.R
+
+bd_results = "/data00/leonardo/oda/GUTS_fmri_preproc/TUT/02_papaya"
+
+```
+
+<br><br>
+
+## A simple example
+To show how to use the papaya widget, we will use some tissue maps of the average MNI152 taken from the [FSL](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki) data/standard directory.
+
+We will simply overlay them on top of the MNI to show their location. Note that I will also use a "Dummy" image which is simply an empty image. I will load this first since papaya does not allow to change the transparency on the image you load first - usually an anatomical / T1w image - while we can imagine situations in which we would like to do so. 
+
+
+### Define location of the images
+
+```{r}
+Dummy=paste0(bd_results,"/Dummy.nii.gz")
+MNI=paste0(bd_results,"/MNI152_T1_2mm.nii.gz")
+GM=paste0(bd_results,"/avg152T1_gray.nii.gz")
+WM=paste0(bd_results,"/avg152T1_white.nii.gz")
+CSF=paste0(bd_results,"/avg152T1_csf.nii.gz")
+
+```
+
+
+### First image
+
+In the basic example we will just load the images with only one option for the colormap. The syntax is pretty straightforward:
+
+- first a vector with the location of the images - that's why I defined it above in variables.
+- a list containing the options for each of the images, in this case only the specification of the colormap
+- I will also ask the overlays _not_ to be smoothed (by default, they are)
+
+Once you are done editing the code, click on the Knit button just on top of the editor to generate the HTML page - or use  `CMD-Shift-K` (Mac) or `Ctrl-Shift-K` (Windoze)
+
+Once the images are loaded, you can click on the squares on the top right corresponding to each loaded image. This will allow you to  modify colormap, alpha (transparency) and thresholds.
+
+Another small limitation of the widget is that the name of the image is not shown in the viewer, unfortunately.
+
+A quick-and-dirty remedy to this is to provide a legend here in the markdown section of the notebook:
+
+**Color legend**
+
+- MNI : Gray
+- Gray Matter : Red
+- White Matter : Blue
+- CSF : Green
+
+```{r}
+
+papaya(
+  c(Dummy, MNI, GM, WM, CSF),
+  option = list(
+    papayaOptions(lut = "Grayscale"),
+    papayaOptions(lut = "Grayscale"),
+    papayaOptions(lut = "Red Overlay"),
+    papayaOptions(lut = "Blue Overlay"),
+    papayaOptions(lut = "Green Overlay")
+  ),
+  interpolation = FALSE
+)
+
+```
+
+
+<br><br>
+
+
+### Use thresholding and alpha
+You can also decide to show the images with a given threshold and transparency (alpha). Check out `?papayaOptions` for the complete list of options
+
+**Color legend**
+
+- MNI : Gray
+- Gray Matter : Red
+- White Matter : Blue
+- CSF : Green
+
+```{r}
+
+papaya(
+  c(Dummy, MNI, GM, WM, CSF),
+  option = list(
+    papayaOptions(alpha = 1, lut = "Grayscale"),
+    papayaOptions(alpha = 1, lut = "Grayscale"),
+    papayaOptions(alpha = 0.7, lut = "Red Overlay", min = 0.4, max = 1),
+    papayaOptions(alpha = 0.7, lut = "Blue Overlay", min = 0.4, max = 1),
+    papayaOptions(alpha = 0.7, lut = "Green Overlay", min = 0.4, max = 1)
+  ),
+  interpolation = FALSE
+)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
