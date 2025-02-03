@@ -15,8 +15,7 @@ You can get started with these requirements by going through the document in the
 graph TD;
     
     subgraph "fMRI Preprocessing"
-        A["Start: fMRI Data"] --> B["Convert to NIFTI if needed"]
-        B --> C["Brain Extraction (BET)"]
+        B["fMRI.nii.gz"] --> C["Brain Extraction (BET)"]
         C --> D["Motion Correction (MCFLIRT)"]
         D --> E["Slice Timing Correction"]
         E --> F["Spatial Smoothing (Gaussian Kernel)"]
@@ -24,11 +23,11 @@ graph TD;
     end
     
     subgraph "Registration"
-        J["T1w"] --> K["BET Skull Stripping"] --> L["T1w_brain"]
-        C["Brain Extraction (BET)"] --> H["Registration to Structural (FLIRT)"]
-        J["T1w"] --> H["Registration to Structural (FLIRT)"]
-        L["T1w_brain"] --> N["Nonlinear Registration to Standard (FNIRT)"]
-        H["Registration to Structural (FLIRT)"] --> N["Nonlinear Registration to Standard (FNIRT)"]
+        
+        J["T1w.nii.gz"] --> K["BET Skull Stripping"] --> L["T1w_brain"] <--> |registration| M["MNI"]
+        C["Brain Extraction (BET)"] <--> |registration| L["T1w_brain"]
+        J["T1w.nii.gz"] --> |registration| M["MNI"]
+
     end
 ```
 The pipelines for fmri preprocessing and fmri <--> T1w <--> MNI (the standard template space) are largely independent, as it can be seen from the diagram. However the fmri <--> T1w registration requires a skull-stripped T1w (T1w_brain), therefore we need to carry out this first from the terminal.

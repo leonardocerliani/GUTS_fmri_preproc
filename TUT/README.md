@@ -1,6 +1,6 @@
 In this folder there is a quasi-random collection of small tutorials that can help getting started with processing MRI images, mostly using [FSL](https://fsl.fmrib.ox.ac.uk/fsl/docs/#/). In the future, it might get more organized.
 
-## 00_preliminary.md
+## 00_begin_here
 - An opinionated short list of the best image viewers out there
 - Link to a basic intro about working with the linux shell (which applies also to the WSL for Windows) 
 - Setting up an the ole-but-efficient [fslview image viewer using Docker](https://github.com/leonardocerliani/fslview_in_a_box)
@@ -8,7 +8,7 @@ In this folder there is a quasi-random collection of small tutorials that can he
 - Setting up VS code to access to a remote server (e.g. Storm) without username and pw
 
 
-## 01_slicing_nifti_images.md
+## 01_slicing_nifti_images
 A very short example of some basic commands of fsl to extract specific 3D volumes from a 4D volume (e.g. an fMRI acquisition)
 
 ## 02_papaya_R_nifti_viewer
