@@ -1,4 +1,4 @@
-# Preprocessing fmri and T1w data with FSL FEAT
+# Preprocessing fmri and T1w data with FSL FEAT and HalfPipe
 
 _leonardo cerliani - 20250203_
 
