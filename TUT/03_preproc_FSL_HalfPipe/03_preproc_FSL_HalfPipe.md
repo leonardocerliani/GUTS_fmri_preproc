@@ -12,6 +12,11 @@ I will need to assume that you have:
 
 You can get started with these requirements by going through the document in the `00_begin_here` folder.
 
+I will use the data contained in the folder `data_orig`. Please make a copy of this directory to `data`:
+```
+cp -r data_orig data
+```
+
 ## Basic processing pipeline overview
 ```mermaid
 graph TD;
