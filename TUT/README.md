@@ -1,6 +1,7 @@
 In this folder there is a quasi-random collection of small tutorials that can help getting started with processing MRI images, mostly using [FSL](https://fsl.fmrib.ox.ac.uk/fsl/docs/#/). In the future, it might get more organized.
 
 ## 00_preliminary.md
+- An opinionated short list of the best image viewers out there
 - Link to a basic intro about working with the linux shell (which applies also to the WSL for Windows) 
 - Setting up an the ole-but-efficient [fslview image viewer using Docker](https://github.com/leonardocerliani/fslview_in_a_box)
 - Exploring images in RStudio using papayawidget (see also later in the folder `02_papaya_R_nifti_viewer`)

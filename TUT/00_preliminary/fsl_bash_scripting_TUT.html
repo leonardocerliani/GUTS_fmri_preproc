@@ -1,0 +1,1006 @@
+
+<!-- saved from url=(0068)https://open.win.ox.ac.uk/pages/fslcourse/lectures/scripting/all.htm -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" type="text/css" href="./fsl_bash_scripting_TUT_files/fslpres.css"><title> SHELL SCRIPTING </title></head><body class="body1"><center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> SHELL SCRIPTING </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr><td valign="middle">
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scripting allows you to:
+<ul>
+<li> encapsulate common lists of commands in a file
+</li><li> automate/batch processes
+</li><li> make new flexible and configurable tools
+</li><li> understand other people's scripts/tools
+</li></ul>
+
+</td><td align="middle" valign="middle">
+<img src="./fsl_bash_scripting_TUT_files/shell.gif" alt="">
+
+</td></tr><tr>
+
+<td colspan="2" align="center">
+<font color="#55ff55"><br><br><br>"I wish you'd forced me to learn scripting 3
+years ago!" - Dr Parry</font>
+
+</td></tr>
+
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 1 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> INTRODUCTION  </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr>
+<td align="left">
+
+<ul>
+<li>Common scripting languages include:
+<ul>
+<li> Shell scripts - sh, bash, csh, tcsh
+</li><li> Other scripting languages - TCL, Perl, Python
+</li></ul>
+</li><li>
+We will look at sh as it is simple, portable, powerful and just like the command line
+<p>
+</p></li><li> Repeated tasks can be done <b><i>much</i></b> faster
+</li><li> Scripts act as exact records of what commands were run
+</li><li> Scripts avoid small inconsistent errors in processing
+<p>
+</p></li><li>
+Knowing scripting helps with any computer tasks, not just analysis
+</li><li> Examples of useful tasks:
+  <ul>
+  <li> Automatically call BET with several different options
+  </li><li> Measure image stats/volumes/PEs for a set of subjects with a single command
+  </li><li> Extract timing info from stimulus / behavioural data files
+  </li><li> Renaming sets of files
+  </li><li> Changing the format of a set of files (e.g. png to tiff)
+</li></ul>
+</li></ul>
+<li> In these slides there are several accompanying practicals that are <i>extremely</i> useful and can be found by following the links marked with <img src="./fsl_bash_scripting_TUT_files/grnprac.gif" alt="e"> at the bottom right (to the left of the navigation arrows)
+
+</li></td></tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 2 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> DATA MANAGEMENT  </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr>
+<td align="left">
+
+<ul>
+<li>In order to help scripting (and your own sanity) it is a good idea
+  to give files and directories systematic names.
+<ul>
+<li> For example:
+</li><li> <code>Con0001 , Con0002, Con0003 , ... , Con0020, Pat0001, Pat0002,
+  ... , Pat0020</code>
+</li></ul>
+<p>
+</p></li><li> Padding the numbers with zeros like this (<code>Con0020</code> instead of
+  <code>Con20</code>) helps keep the ordering consistent for scripting
+
+<p>
+</p></li><li> In the UK (and other countries) you <i><b>must not</b></i> have
+ identifiers (names, dates of birth, even <i>initials</i>) in the filenames
+
+<p>
+</p></li><li> Consider renaming your original images to more meaningful (and consistent) names
+
+<p>
+</p></li><li> Keep track of your disk usage and delete any analyses that were
+  incorrect (many people have <code>res.feat, res+.feat, res++.feat,
+  res+++.feat</code> , etc. which is confusing and a waste of space)
+
+</li></ul></td></tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 3 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> BASIC SHELL SCRIPT </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr width="100%">
+<td width="100%" align="left">
+
+<ul>
+<li>
+
+A bourne shell (sh) script is a list of lines in a file that are
+executed in the bourne shell (a forerunner of bash); simplest is just
+commands that could be run at the prompt.
+
+<p></p></li><li>
+<font color="#ff5555">The first line in a sh script <b>MUST</b> be</font> &nbsp; <code>#!/bin/sh</code>
+
+<p></p></li><li>
+Things to remember:
+<ul>
+<li> always make sure it has executable status 
+      <br><code>chmod a+x filename</code>
+</li><li> script runs in the current directory (pwd)
+</li><li> may not inherit the same environment - esp. if used by others
+</li></ul>
+<p>
+</p></li><li>Example:<br>
+<code>#!/bin/sh
+<br>bet im1 im1_brain -m
+<br>mv im1_brain_mask.nii.gz mask1.nii.gz
+</code>
+<p>
+</p></li><li>A script can be stopped at any point by using <code>return</code>: e.g. <code>return 0</code>
+</li></ul>
+</td>
+</tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 4 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> USEFUL SHELL SCRIPT TEMPLATE </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr width="100%">
+<td width="100%" align="left">
+
+<ul>
+<li>
+
+Before learning things systematically, here is a fairly simple script which is very powerful and useful for modifying for many different tasks.
+
+<br>
+<code>
+&nbsp; #!/bin/sh
+<br>&nbsp; for filename in *.nii.gz ; do
+<br>&nbsp;   &nbsp; fname=`$FSLDIR/bin/remove_ext ${filename}`
+<br>&nbsp;   &nbsp; fslmaths ${fname} -s 2 ${fname}_smooth2
+<br>&nbsp;   &nbsp; mv ${fname}.nii.gz ${fname}_smooth0.nii.gz
+<br>&nbsp; done
+</code>
+
+<br></li><li>
+What this does:
+<br> &nbsp; For each image (*.nii.gz) it smooths it to make a new one of the same name but ending in _smooth2 and also renames the unsmoothed image to end with _smooth0
+<br></li><li>
+How this works:
+<ul>
+<li> The variable <code>filename</code> is used in a <i>for</i> loop to go through each name matching *.nii.gz
+</li><li> The variable <code>fname</code> is set to the filename with the ending (e.g. .nii.gz) removed.
+  <br> &nbsp; Don't worry about how this works for now - the details will be explained later.
+</li><li> <code>${filename}</code> and <code>${fname}</code> are used to get the values (contents) of the variables
+</li><li> fslmaths is used to do the smoothing.
+</li><li> mv is used to do the renaming (notice that .nii.gz is needed here, but not for the fsl tools, as they work with or without the .nii.gz endings).
+</li></ul>
+</li></ul>
+</td>
+</tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 5 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> SCRIPTING TIPS </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr width="100%">
+<td width="5%"></td>
+<td width="90%" align="left">
+
+Here are some basic, but useful, tips for writing scripts
+<ul>
+<li> Put in comments (to jog your memory when you write your paper
+  months/years later)
+<p>
+</p></li><li> Put in some <code>echo</code> output commands so that you get
+  some feedback on what your script is doing as it runs
+<p>
+</p></li><li> If your script starts doing something bad (or nothing at all)
+  then use control-C to stop it
+<p>
+</p></li><li> If your script makes new files, changes files or deletes
+  files then start with a version which uses <code>echo</code> in
+  front
+of the important commands.  When you run this version it will just
+  display the commands to the screen so that you can examine them
+  carefully and make sure they are right.  Once you are happy with
+  them then remove the <code>echo</code> from in front of these
+  commands and run this version.
+<p>
+</p></li><li> It doesn't hurt to make a backup of key files before running a
+script, just in case.
+</li></ul>
+
+</td>
+<td width="5%"></td>
+</tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 6 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> BASIC SCRIPTING CONCEPTS </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr width="100%">
+<td width="5%"></td>
+<td width="90%" align="left">
+
+<ul>
+<li>We will now look systematically at the following shell and scripting concepts:
+<ul>
+<li> <i>Wildmasks</i>
+</li><li> <i>Echo (printing to the screen/file)</i>
+</li><li> <i>Variables</i>
+</li><li> <i>Braces</i>
+</li><li> <i>Command Line Arguments</i>
+</li><li> <i>Single Quotes and Backslash</i>
+</li><li> <i>Double Quotes</i>
+</li><li> <i>Backquotes</i>
+</li><li> <i>Pipes</i>
+</li><li> <i>File Redirection</i>
+</li></ul>
+</li><li> Following this some useful utilities and programming constructs (like the for loop) will be covered.
+</li></ul>
+
+</td>
+<td width="5%"></td>
+</tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 7 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> WILDMASKS </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr><td>
+Can use wildmasks for matching patterns in <em>filenames</em>;
+expand into a list of <em>all</em> filename matches. E.g.:
+<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>*</code> matches any string
+<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>?</code> matches any one character
+<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>[abgj]</code> matches any one character in this range/list
+<code>
+<br><font color="#55ff55">$</font> ls
+<br>&nbsp; sub1_t1.nii.gz sub1_t2.nii.gz sub2_t1.nii.gz sub2_t2.nii.gz sub3_pd.nii.gz 
+<br><font color="#55ff55">$</font> ls sub*
+<br>&nbsp; sub1_t1.nii.gz sub1_t2.nii.gz sub2_t1.nii.gz sub2_t2.nii.gz sub3_pd.nii.gz 
+<br><font color="#55ff55">$</font> ls sub1* 
+<br>&nbsp; sub1_t1.nii.gz sub1_t2.nii.gz 
+<br><font color="#55ff55">$</font> ls sub*t1* 
+<br>&nbsp; sub1_t1.nii.gz sub2_t1.nii.gz 
+<br><font color="#55ff55">$</font> ls sub[13]*
+<br>&nbsp; sub1_t1.nii.gz sub1_t2.nii.gz sub3_pd.nii.gz 
+<br><font color="#55ff55">$</font> ls sub?_t2.nii.gz 
+<br>&nbsp; sub1_t2.nii.gz sub2_t2.nii.gz
+</code>
+</td></tr>
+
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 8 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> ECHO </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr width="100%">
+<td width="10%"></td>
+<td width="80%" align="left">
+<ul>
+<li>
+<code>echo</code> prints the rest of the line to the screen (standard output).
+</li><li>This is useful for providing output or updates in a script.
+
+<p></p></li><li> Wildmasks (for filenames) and variables (values) are
+substituted in the argument <em>before</em> echo prints them.
+
+<p>
+</p></li><li>Examples:
+<code>
+<br><font color="#55ff55">$</font> echo Hello All!
+<br>&nbsp; Hello All!
+<br><font color="#55ff55">$</font> echo sub*t1*
+<br>&nbsp; sub1_t1.nii.gz sub2_t1.nii.gz
+<br><font color="#55ff55">$</font> echo j*k
+<br>&nbsp; j*k
+</code>
+</li></ul>
+
+</td>
+<td width="10%"></td>
+</tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 9 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> VARIABLES </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr>
+<td align="left">
+<ul>
+<li>Like most programming languages, the shell allows items to be stored in variables.
+</li><li>All shell variables store <em>strings</em>.
+<p>
+</p></li><li>A variable is set using:
+<code><br>NAME=VALUE</code>
+
+</li><li>The variable name should start with a letter but can contain numbers and underscores
+</li><li>The value of a variable can be returned/used by adding a prefix <code>$</code>
+
+<p>
+</p></li><li>Examples:
+<code>
+<br><font color="#55ff55">$</font> var1=im1.nii.gz
+<br><font color="#55ff55">$</font> echo $var1
+<br>&nbsp; im1.nii.gz
+<br><font color="#55ff55">$</font> echo var1
+<br>&nbsp; var1
+<br><font color="#55ff55">$</font> ls $var1
+<br>&nbsp; im1.nii.gz
+</code>
+</li></ul>
+
+</td></tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 10 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> BRACES </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr><td align="left">
+<ul>
+<li>Any name that starts with a letter can be used as a variable name.
+</li><li>For instance: <code>v, v1, v1_1, v_filename_4</code>
+<p>
+</p></li><li>To add a string immediately after a variable name can be confusing.
+</li><li>The situation is solved by putting the variable name inside braces.
+<p>
+</p></li><li>Examples:
+<code>
+<br><font color="#55ff55">$</font> v=im1
+<br><font color="#55ff55">$</font> echo $v_new
+<br>
+<br><font color="#55ff55">$</font> echo ${v}_new
+<br>&nbsp; im1_new
+</code>
+
+<p>
+</p></li><li>NB: all unused variables are blank by default (generate no error)
+</li></ul>
+
+</td></tr>
+
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 11 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> COMMAND LINE ARGUMENTS </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr width="100%">
+<td width="10%"></td>
+<td width="80%" align="left">
+<ul>
+<li>Inside a script the variables <code>$1 $2 $3</code> <i>etc.</i> store
+the value of the command line arguments.
+<p>
+</p></li><li>e.g. if a script called reg_vol is executed as: 
+<br><code><font color="#55ff55">$</font> reg_vol im1 3 abc</code> 
+<br>then <code>$1 = im1, $2 = 3, $3 = abc</code>
+<p>
+</p></li><li>Other special variables are:
+<ul>
+<li><code>$0</code> = name of the script (often including the path)
+</li><li><code>$#</code> = number of command line arguments given
+</li><li><code>$@</code> = all the command line arguments 
+  <br>&nbsp; &nbsp; &nbsp; &nbsp; (i.e. <code>$1 $2 $3 ...</code>)
+</li><li><code>$$</code> = process ID number (unique to this process)
+</li></ul>
+
+</li></ul>
+
+</td>
+<td width="10%"></td>
+</tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 12 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> SINGLE QUOTES AND BACKSLASH </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr><td align="left">
+<ul>
+<li>The shell substitutes variable names and wildmasks <em>before</em>
+executing the command - sometimes this is undesirable.
+</li><li>To avoid substitutions either 
+<ol>
+<li>prefix the special character (wildmask or <code>$</code> sign) with a backslash: <code>\</code>
+</li><li>put the desired string in single quotes: <code>'</code>
+</li></ol>
+<p>
+</p></li><li>Examples:
+<code>
+<br><font color="#55ff55">$</font> var1=im1.nii.gz
+<br><font color="#55ff55">$</font> echo $var1
+<br>&nbsp; im1.nii.gz
+<br><font color="#55ff55">$</font> echo \$var1
+<br>&nbsp; $var1
+<br><font color="#55ff55">$</font> echo '$var1'
+<br>&nbsp; $var1
+</code>
+</li></ul>
+
+</td></tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 13 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> DOUBLE QUOTES </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr width="100%">
+<td width="5%"></td>
+<td width="90%" align="left">
+<ul>
+<li>To group several strings together as one argument it is necessary
+to use double quotes: <code>"</code>
+<p>
+</p></li><li>For example:
+<code>
+<br><font color="#55ff55">$</font> v=Hello World
+<br><font color="#55ff55">$</font> echo $v
+<br>&nbsp; Hello
+<br><font color="#55ff55">$</font> v="Hello World"
+<br><font color="#55ff55">$</font> echo $v
+<br>&nbsp; Hello World
+</code>
+<p>
+</p></li><li>NB: Variable substitutions are done inside double quotes but wildmasks are <i>not</i> expanded:
+<br>&nbsp;  e.g. &nbsp; <code>echo "*"</code>  &nbsp; just prints a <code>*</code>
+<br>&nbsp;  but &nbsp; <code>echo "$v"</code>  &nbsp; is the same as &nbsp; <code>echo $v</code>
+
+</li></ul>
+
+</td>
+<td width="5%"></td>
+</tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 14 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> BACKQUOTES </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr width="100%">
+<td width="5%"></td>
+<td width="90%" align="left">
+<ul>
+<li>The (text) result of any command can be captured using backquotes: <code>`</code>
+<p>
+</p></li><li>This is very useful for setting variables.
+<p>
+</p></li><li>Examples:
+<code>
+<br><font color="#55ff55">$</font> v=`ls sub[13]*` 
+<br><font color="#55ff55">$</font> echo $v
+<br>&nbsp; sub1_t1.nii.gz sub1_t2.nii.gz sub3_pd.nii.gz 
+<br><font color="#55ff55">$</font> echo `fslval sub1_t1 pixdim2`
+<br>&nbsp; 4.0
+</code>
+
+<p>
+</p></li><li>NB: the result is always treated as a single string, even if it contains spaces
+</li></ul>
+
+</td>
+<td width="5%"></td>
+</tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 15 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> PIPE </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr width="100%">
+<td width="5%"></td>
+<td width="90%" align="left">
+<ul>
+<li>One of the most powerful features of the shell is the ability to
+chain commands together, each taking its input from the previous command's
+output.
+<p>
+</p></li><li>This is done using the pipe symbol: <code>|</code>
+<p>
+</p></li><li>Examples (using the wordcount utility):
+<code>
+<br><font color="#55ff55">$</font> cat .bashrc | wc
+<br> &nbsp;      7    &nbsp;    83    &nbsp;   534
+<br><font color="#55ff55">$</font> echo "Hello World" | wc
+<br> &nbsp;      1    &nbsp;    2    &nbsp;   12
+</code>
+<p>
+</p></li><li>Technically this redirects standard output of one command to 
+be the standard input of another.  
+</li><li>Error messages that are 
+printed to standard error are <em>not</em> redirected with the pipe.
+</li></ul>
+
+</td>
+<td width="5%"></td>
+</tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 16 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> FILE REDIRECTION </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr width="100%">
+<td width="5%"></td>
+<td width="90%" align="left">
+<ul>
+<li>Command input can be taken from a file with: <code> &lt; </code>
+<p>
+</p></li><li>Command output can be redirected to a file with:  <code> &gt; </code>
+<p>
+</p></li><li>Command output can be <em>appended</em> to a file with: <code> &gt;&gt; </code>
+<p>
+</p></li><li>Examples:
+<code>
+<br><font color="#55ff55">$</font> echo "smoothing=10mm" &gt; settings.txt
+<br><font color="#55ff55">$</font> echo "No lowpass" &gt;&gt; settings.txt
+<br><font color="#55ff55">$</font> cat settings.txt
+<br>smoothing=10mm
+<br>No lowpass
+</code>
+</li></ul>
+
+</td>
+<td width="5%"></td>
+</tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 17 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> HANDY SHELL UTILITIES </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr width="100%">
+<td width="5%"></td>
+<td width="90%" align="left">
+
+<ul>
+<li>Some common and nearly essential utilities/programs for shell scripting are:
+<p>
+<table width="80%"><tbody><tr width="100%">
+<td width="20%">&nbsp;</td>
+<td width="40%" align="left">Basic
+</td><td width="40%" align="left">Advanced</td></tr><tr><td></td><td>
+<ul>
+<li> <code>test</code> (or <code>[ ]</code> )
+</li><li> <code>if</code>
+</li><li> <code>for</code>
+</li><li> <code>while</code>
+</li></ul>
+</td><td>
+<ul>
+<li> <code>grep</code> (search)
+</li><li> <code>bc</code> (calculator)
+</li><li> <code>sed</code> (find and replace)
+</li><li> <code>awk</code> (select columns)
+</li></ul>
+</td></tr></tbody></table>
+</p></li></ul>
+
+</td>
+<td width="5%"></td>
+</tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 18 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> TEST </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr><td colspan="2" align="left">
+
+<ul>
+<li>The command <code>test</code> allows two strings or two integers to
+be compared.  
+
+</li><li>
+A shorthand version uses <code>[</code> and <code>]</code>
+around the arguments.
+<br><font color="cyan"><em>WARNING</em>: be very careful to put the spaces in correctly!</font>
+
+</li><li>
+The syntax is very different for comparing numbers or strings (see <code>help test</code> for the syntax options).
+
+</li><li>
+<code>test</code> can also be used to check the status of files (whether they exist, are writable, etc.)
+
+</li></ul>
+
+</td></tr>
+<tr><td>&nbsp;  <code>test $a = my</code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td> string equality</td></tr>
+<tr><td>&nbsp;  <code>[ $a = my ]</code> </td><td> as above</td></tr>
+<tr><td>&nbsp;  <code>[ $a -eq 2 ]</code>  </td><td> tests numerical equality</td></tr>
+<tr><td>&nbsp;  <code>[ 11 -gt 2 ]</code>  </td><td> compares numbers (greater than)</td></tr>
+<tr><td>&nbsp;  <code>[ 11 &gt; 2 ]</code>    </td><td> <em>does NOT do numerical comparison</em></td></tr>
+<tr><td>&nbsp;  <code>[ -e im1.nii.gnii.gz ]</code>  </td><td> tests if file exists</td></tr>
+
+<tr><td>&nbsp;  </td><td> </td></tr>
+<tr><td colspan="2" align="left">
+&nbsp;  Note: for non-integer numerical comparisons, see <code>bc</code></td></tr>
+
+
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 19 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> IF </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr width="100%">
+<td width="5%"></td>
+<td width="90%" align="left">
+
+<ul>
+<li>
+The <code>if</code> command works like in most programming languages.
+<p>
+</p></li><li>
+It usually uses the result of the <code>test</code> command and its
+syntax is:
+<pre><code>
+if [</code> EXPRESSION <code>] ; then</code>
+COMMANDS ;
+<code> else </code>
+COMMANDS2 ;
+<code>fi</code>
+</pre>
+
+</li><li>
+The <code>else</code> part is optional.
+
+<p>
+</p></li><li>For example:
+<pre><code> if [ $a = 2 ] ; then
+   b="y-axis";
+ fi </code></pre>
+
+</li></ul></td>
+<td width="5%"></td>
+</tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 20 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> FOR </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr><td align="left">
+
+<ul>
+<li>The <code>for</code> command executes a set of commands for every
+word in a list of words.
+</li><li>
+Syntax:
+<code>
+<br>for VARIABLE in LIST OF VALUES ; do 
+<br> &nbsp; &nbsp;  COMMANDS ;
+<br>done
+</code>
+
+<p>
+</p></li><li>
+The commands are executed once for each entry in the words list.
+</li><li>
+Each time the variable specified is equal to the current word.
+
+<p>
+</p></li><li>Example:
+<code>
+<br>
+for filename in im1 im2 im3 ; do
+<br> &nbsp; &nbsp; bet $filename ${filename}_brain ;
+<br>done
+</code>
+
+</li></ul>
+
+</td></tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 21 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> BC </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr width="100%">
+<td width="5%"></td>
+<td width="90%" align="left">
+
+<ul>
+<li>The <code>bc</code> command acts like a calculator.
+<p>
+</p></li><li>It is usually used to set variables, using <em>echo, pipe</em>
+and <em>backquotes</em>.
+</li><li> Use the <code>-l</code> option to get accurate floating-point arithmetic.
+
+<p>
+</p></li><li>Example:
+<code>
+<br><font color="#55ff55">$</font> a=2;
+<br><font color="#55ff55">$</font> a=`echo "3 * $a + 1" | bc -l`;
+<br><font color="#55ff55">$</font> echo $a
+<br>&nbsp; 7
+</code>
+
+<p>
+</p></li><li>Note: the double quotes stop the <code>*</code> being used as a wildmask for filenames.
+
+</li><li>Numerical comparisons of non-integers can be done with <code>bc</code> where 0 is returned for false and 1 for true.
+<br> &nbsp;  e.g. &nbsp; <code>echo "-1.2 &lt; 0.5" | bc</code> gives 1
+<br> &nbsp;  e.g. &nbsp; <code>echo "-1.2 &gt; 0.5" | bc</code> gives 0
+<br> So in an if statement do something like: 
+<br> &nbsp; <code>if [ `echo "$a &lt; $b" | bc -l` = 1 ] ; then ...</code>
+</li></ul>
+
+</td>
+<td width="5%"></td>
+</tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 22 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> WHILE </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr width="100%">
+<td width="5%"></td>
+<td width="90%" align="left">
+
+<ul>
+<li>The <code>while</code> command executes a set of commands as long
+as the condition is true.
+</li><li>
+Syntax:
+<code>
+<br>while CONDITION ; do 
+<br> &nbsp; &nbsp;  COMMANDS ;
+<br>done
+</code>
+
+<p>
+</p></li><li>
+The condition is usually a <code>test</code> statement.
+
+<p>
+</p></li><li>Example:
+<code>
+<br>a=1
+<br>while [ $a -lt 4 ] ; do
+<br> &nbsp; &nbsp; bet im$a brain$a ;
+<br> &nbsp; &nbsp; a=`echo $a + 1 | bc` ;
+<br>done
+</code>
+
+</li></ul>
+
+</td>
+<td width="5%"></td>
+</tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 23 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> GREP </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr width="100%">
+<td width="5%"></td>
+<td width="90%" align="left">
+
+<ul>
+<li>The <code>grep</code> command finds patterns in strings.
+<p>
+</p></li><li>It is usually used to extract lines from a file that contain
+a given word or phrase.
+<p>
+</p></li><li>This is a very powerful tool when used together with pipes
+to filter outputs.
+<p>
+
+</p></li><li>Example:
+<br>Find the value of pixdim1 from the fslhd output
+<code>
+<br>fslhd im1 | grep pixdim1
+</code>
+
+</li></ul>
+
+</td>
+<td width="5%"></td>
+</tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 24 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> AWK </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr><td align="left">
+
+<ul>
+<li>The <code>awk</code> command is a very general pattern matching facility.
+</li><li>One simple but useful capability is to pick out columns of text.
+</li><li>This is particularly handy for manipulating tabular information such
+as in stimulus files.
+<p>
+</p></li><li>Syntax for selecting column <em>N</em> is:
+<br>&nbsp; <code>awk '{print $N}'</code>
+<p>
+</p></li><li>Note that the <em>exact</em> syntax (quotes and braces) must be used.
+
+</li><li>Example:
+<code>
+<br><font color="#55ff55">$</font> v="im*.nii.gz"
+<br><font color="#55ff55">$</font> echo $v
+<br>&nbsp; im1.nii.gz im2.nii.gz im3.nii.gz
+<br><font color="#55ff55">$</font> echo $v | awk '{print $2}'
+<br>&nbsp; im2.nii.gz
+</code>
+
+</li></ul>
+
+</td></tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 25 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> SED </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr width="100%">
+<td width="5%"></td>
+<td width="90%" align="left">
+
+<ul>
+<li>The <code>sed</code> command performs string substitutions.
+</li><li>It is usually used to add, remove or change parts of a string.
+</li><li>This is often invaluable for modifying variables.
+<p>
+</p></li><li>Syntax for changing <code>STRING1</code> to <code>STRING2</code> is:
+<br>&nbsp; <code>sed s/STRING1/STRING2/g</code>
+<p>
+
+</p></li><li>Example:
+<code>
+<br><font color="#55ff55">$</font> v="im*.nii.gz"
+<br><font color="#55ff55">$</font> v=`echo $v | sed s/im/Subject/g`
+<br><font color="#55ff55">$</font> echo $v
+<br>&nbsp; Subject1.nii.gz Subject2.nii.gz Subject3.nii.gz
+</code>
+<p>
+</p></li><li>Warning: The characters <code>. * [ ] /</code> have special
+meaning in the first string unless preceded by a backslash
+</li><li>Tip: Any character can be used instead of <code>/</code>
+<br>e.g. &nbsp; <code>sed s@STRING1@STRING2@g</code> 
+<br>which can be <i>very</i> handy when dealing with directories/files
+</li></ul>
+
+</td>
+<td width="5%"></td>
+</tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 26 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> FUNCTIONS </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr><td align="left">
+
+<ul>
+<li>Like other languages, functions can be defined in shell scripts.
+</li><li>Useful for splitting up scripts into understandable,
+reusable pieces.
+</li><li>Functions can be called like independent scripts.
+<p>
+</p></li><li>Syntax for creating a function is:
+<br>&nbsp; <code>function NAME { COMMANDS ; }</code>
+<br>or the short form:
+<br>&nbsp; <code>NAME () { COMMANDS ; }</code>
+
+<p>
+</p></li><li>Example:
+<code>
+<br><font color="#55ff55">$</font> function hi { echo "Hi! $1" ; }
+<br><font color="#55ff55">$</font> hi
+<br> &nbsp; Hi!
+<br><font color="#55ff55">$</font> hi There
+<br> &nbsp; Hi! There
+</code>
+
+</li></ul>
+
+</td></tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 27 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> REGULAR EXPRESSIONS </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr><td align="left">
+
+<ul>
+<li><em>Regular expressions</em> are a form of pattern matching syntax
+which many commands use. (e.g. <code>grep, sed</code>)
+</li><li>They are very flexible and not quickly learnt.
+</li><li>Some basic forms are easy to learn and very useful.
+</li><li><em>Not</em> the same as shell wildmasks, although
+some are similar.
+</li><li>Special characters used in regular expressions include:
+<table><tbody><tr width="80%">
+<td><code>.</code></td> <td>matches any one character</td></tr>
+<tr><td><code>*</code></td> <td>matches zero or more of the last character</td></tr>
+<tr><td><code>.*</code></td> <td>matches any string</td></tr>
+<tr><td><code>[ ]</code></td> <td>matches any character in the range</td></tr>
+<tr><td><code>^</code></td> <td>represents the start of the line</td></tr>
+<tr><td><code>$</code></td> <td>represents the end of the line</td></tr>
+<tr><td><code>[^ ] &nbsp;</code></td> <td>matches any character <em>not</em> in the range</td></tr>
+</tbody></table>
+
+</li></ul>
+
+</td></tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 28 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> REGULAR EXPRESSIONS </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr><td align="left">
+
+<ul>
+
+<li>Examples:
+<code>
+<br><font color="#55ff55">$</font> echo "Hello world" | sed 's/w.*/X/g'
+<br> &nbsp; Hello X
+<br><font color="#55ff55">$</font> echo "Hello world" | sed 's/w*/X/g'
+<br> &nbsp; XHXeXlXlXoX XXoXrXlXdX
+<br><font color="#55ff55">$</font> echo "Hello world" | sed 's/^.* /X/g'
+<br> &nbsp; Xworld
+<br><font color="#55ff55">$</font> echo "Hello world" | sed 's/.$/X/g'
+<br> &nbsp; Hello worlX
+<br><font color="#55ff55">$</font> echo "Hello world" | sed 's/[wo]/X/g'
+<br> &nbsp; HellX XXrld
+<br><font color="#55ff55">$</font> echo "Hello world" | sed 's/[^wo]/X/g'
+<br> &nbsp; XXXXoXwoXXX
+</code>
+
+</li></ul>
+
+</td></tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 29 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> FSL COMMANDS </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr><td align="left">
+
+<ul>
+
+<li>There are many fsl command line utilities, but there are also specific utilities to assist with scripting:
+<ol>
+<li><code>remove_ext</code>
+ <br>&nbsp; this removes only image specific extensions: .nii.gz .nii .hdr .img .hdr.gz .img.gz
+ <br>&nbsp; e.g. <code>remove_ext /Volumes/MJ/img1.nii.gz</code>  gives <code>/Volumes/MJ/img1</code>
+</li><li><code>imtest</code>
+ <br>&nbsp; this returns the character 1 if the specified file exists and is an image, or 0 otherwise
+ <br>&nbsp; e.g. <code>imtest ../img1</code>  gives 1 if <code>../img1.nii.gz</code> exists (or if <code>../img1.hdr</code> exists, etc.)
+</li><li><code>imglob</code>
+ <br>&nbsp; this expands into a list of full filenames for images only
+ <br>&nbsp; e.g. <code>imglob *</code>  lists only the images out of all matches for *
+</li><li><code>imcp, immv, imrm, imln</code>
+ <br>&nbsp; these do <code>cp, mv, rm</code> and <code>ln</code> for images, without needing to specify the extensions (useful when dealing with Analyze or nifti files without needing to know which)
+ <br>&nbsp; e.g. <code>imcp im1 im1_orig</code>  would be the same as <code>cp im1.nii.gz im1_orig.nii.gz</code> for nifti files, but would do <code>cp im1.hdr im1_orig.hdr</code> and <code>cp im1.img im1_orig.img</code> for Analyze files
+</li></ol>
+</li></ul>
+
+</td></tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 30 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> FURTHER COMMANDS </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr width="100%">
+<td width="5%"></td>
+<td width="90%" align="left">
+
+<ul>
+
+<li>There are many other commands which are useful.  For example:
+  <ul>
+  <li> <code>basename</code>
+	<br>&nbsp; removes all leading directory info and specified extensions
+	<br>&nbsp; e.g. <code>basename /tmp/epi.nii.gz .nii.gz</code> &nbsp; gives &nbsp; <code>epi</code>
+  </li><li> <code>dirname</code>
+	<br>&nbsp; just returns the directory path to the specified file
+	<br>&nbsp; e.g. <code>dirname /tmp/epi.nii.gz</code> &nbsp; gives &nbsp; <code>/tmp</code>
+  </li><li> <code>sort</code>
+	<br>&nbsp; sorts files (by line) according to alphabetic or numerical order
+  </li><li> <code>which</code>
+	<br>&nbsp; reports where an executable file can be found
+	<br>&nbsp; e.g. <code>which flirt</code> &nbsp; gives &nbsp; <code>/usr/local/fsl/bin/flirt</code>
+  </li><li> <code>head</code>
+	<br>&nbsp; prints the first n lines of a file
+  </li><li> <code>tail</code>
+	<br>&nbsp; prints the last n lines of a file
+  </li><li> <code>touch</code>
+	<br>&nbsp; creates an empty file
+  </li><li> <code>paste</code>
+	<br>&nbsp; merges files together (horizontally)
+  </li></ul>
+<p>
+
+</p></li></ul>
+
+</td>
+<td width="5%"></td>
+</tr>
+
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 31 of 32</font></td></tr></tbody></table></center>
+<center><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="2" align="CENTER" height="0"><font class="title"> LEARNING MORE </font></td></tr><tr><td colspan="2"><hr></td></tr><tr><td colspan="2" height="645"> <table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+<tbody><tr width="100%">
+<td width="5%"></td>
+<td width="90%" align="left">
+
+<ul>
+
+<li>For more image analysis command line tools see:
+<br>&nbsp; <code><a href="http://www.fmrib.ox.ac.uk/fsl/avwutils/index.html">www.fmrib.ox.ac.uk/fsl/avwutils/index.html</a></code>
+<p>
+</p></li><li>To get details about a specific command:
+<ul> <li> run <code>man</code> or <code>help</code> on that command </li></ul>
+<p>
+</p></li><li>To learn more about general commands and scripting try:
+<ul>
+<li> searching the web
+</li><li> looking at other scripts (e.g. in $FSLDIR/bin)
+<br> &nbsp; Note: check if they are scripts by running <code>file</code> on them
+</li><li> <code>apropos</code> searches for any commands with matching keywords in their description  
+ <br> &nbsp; e.g. <code>apropos merge</code> shows all commands that have something to do with merging
+</li><li> books on unix, shell and scripting (though many of them are very technical)
+</li></ul>
+
+</li></ul>
+
+</td>
+<td width="5%"></td>
+</tr>
+</tbody></table> </td></tr><tr><td colspan="2" height="0">
+</td></tr><tr><td colspan="3" align="right"><font size="3" align="right">scripting10 : 32 of 32</font></td></tr></tbody></table></center>
+
+</body></html>

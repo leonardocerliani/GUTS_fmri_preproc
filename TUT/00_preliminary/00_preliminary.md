@@ -1,5 +1,16 @@
 # Preliminary information
 
+## An opinionated list of the best MRI viewer
+
+- [MRIcroGL](https://github.com/rordenlab/MRIcroGL) : probably the best for creating beautiful 2D images
+
+- [Mango](https://mangoviewer.com/) : very good choice for a hassle-free interaction between 2D views and surface renderings. It also produces shareable HTML pages with an embedded viewer.
+
+- [Surfice](https://www.nitrc.org/projects/surfice/) : great fancy rendering of surfaces (although the projection of blobs/activations look better in Mango IMHO)
+
+- [itk-SNAP](http://www.itksnap.org/pmwiki/pmwiki.php) : pro-graded image viewer with easy access to lots of information about the image
+
+
 ## basic intro to linux terminal
 - by [TechByCosta](https://www.youtube.com/watch?v=V_G2_uCE8ug)
 
