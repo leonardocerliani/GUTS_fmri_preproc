@@ -14,3 +14,7 @@ A very short example of some basic commands of fsl to extract specific 3D volume
 ## 02_papaya_R_nifti_viewer
 If you like working with R, the [`papayaWidget` by the great John Muschelli](https://johnmuschelli.com/papayaWidget/) is a life saver. Not only it enables to programmatically define views with multiple layers of overlay; by means of Rmd (R Markdown) notebooks, it allows you to create HTML pages with a full-fledged interactive 3D viewer (not just single images). This is extremely useful to share results with colleagues. You can open the `papaya_TUT.html` page for an example.
 
+## 03_preproc_FSL_HalfPipe
+A very basic tutorial about how to carry out preprocessing of fmri images (and registration to the T1w) using the FSL Feat GUI and HalfPipe
+
+
