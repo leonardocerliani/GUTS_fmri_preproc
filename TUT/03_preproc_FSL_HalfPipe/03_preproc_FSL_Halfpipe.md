@@ -19,7 +19,7 @@ graph TD;
         C --> D["Motion Correction (MCFLIRT)"]
         D --> E["Slice Timing Correction"]
         E --> F["Spatial Smoothing (Gaussian Kernel)"]
-        F --> G["Temporal Filtering (High-pass & Low-pass)"]
+        F --> G["Highpass Temporal Filtering"]
     end
     
     subgraph "Registration"
