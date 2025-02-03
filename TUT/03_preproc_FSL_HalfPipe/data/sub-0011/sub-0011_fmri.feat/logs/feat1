@@ -1,0 +1,13 @@
+
+/bin/cp /tmp/feat_q3wm8sis.fsf design.fsf
+
+mkdir .files;cp /data00/leonardo/warez/fsl/doc/fsl.css .files;cp -r /data00/leonardo/warez/fsl/doc/images .files/images
+
+/data00/leonardo/warez/fsl/bin/fsl_sub -T 10 -l logs -N feat0_init   /data00/leonardo/warez/fsl/bin/feat /home/cerliani/tmp/GUTS_fmri_preproc/TUT/03_preproc_FSL_HalfPipe/data/sub-0011/sub-0011_fmri.feat/design.fsf -D /home/cerliani/tmp/GUTS_fmri_preproc/TUT/03_preproc_FSL_HalfPipe/data/sub-0011/sub-0011_fmri.feat -I 1 -init
+150715
+
+/data00/leonardo/warez/fsl/bin/fsl_sub -T 35 -l logs -N feat2_pre -j 150715  /data00/leonardo/warez/fsl/bin/feat /home/cerliani/tmp/GUTS_fmri_preproc/TUT/03_preproc_FSL_HalfPipe/data/sub-0011/sub-0011_fmri.feat/design.fsf -D /home/cerliani/tmp/GUTS_fmri_preproc/TUT/03_preproc_FSL_HalfPipe/data/sub-0011/sub-0011_fmri.feat -I 1 -prestats
+151383
+
+/data00/leonardo/warez/fsl/bin/fsl_sub -T 1 -l logs -N feat5_stop -j 151383  /data00/leonardo/warez/fsl/bin/feat /home/cerliani/tmp/GUTS_fmri_preproc/TUT/03_preproc_FSL_HalfPipe/data/sub-0011/sub-0011_fmri.feat/design.fsf -D /home/cerliani/tmp/GUTS_fmri_preproc/TUT/03_preproc_FSL_HalfPipe/data/sub-0011/sub-0011_fmri.feat -stop
+185898

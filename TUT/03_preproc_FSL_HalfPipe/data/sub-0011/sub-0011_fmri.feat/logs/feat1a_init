@@ -1,0 +1,6 @@
+</pre><hr>Initialisation<br><pre>
+
+/data00/leonardo/warez/fsl/bin/fslmaths /home/cerliani/tmp/GUTS_fmri_preproc/TUT/03_preproc_FSL_HalfPipe/data/sub-0011/sub-0011_fmri prefiltered_func_data -odt float
+Total original volumes = 50
+
+/data00/leonardo/warez/fsl/bin/fslroi prefiltered_func_data example_func 25 1
