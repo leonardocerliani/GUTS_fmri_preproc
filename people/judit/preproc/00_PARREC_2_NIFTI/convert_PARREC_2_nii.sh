@@ -35,23 +35,19 @@
 # - Destructive : replaces all the subs' folders in ${dest} created by previous run of this (or similar) script
 # - Incremental : converts only the subs in the sub_list which are NOT already present in ${dest}
 #
-# LC - june 2024
+# LC - jan 2025
 
+export root="/data00/leonardo/GUTS_fmri_preproc/people/judit"
 
-sub_list="/data06/EmoReg/EmoReg/Data_collection/sub_list_MINI.txt" # full path to the subject list file.
+sub_list="${root}/preproc/00_PARREC_2_NIFTI/sub_list.txt" # full path to the subject list file.
 
-n_processes=20  # be considerate with the available resources
+n_processes=10  # be considerate with the available resources
 
 launch_octave_conversion() {
     local sub=$1
 
-    # # FOR TESTING ONLY
-    # orig_root="/data00/leonardo/oda/GUTS_fmri_preproc/00_PARREC_2_NIFTI/simulate_data06"
-    # dest_root="/data00/leonardo/oda/GUTS_fmri_preproc/00_PARREC_2_NIFTI/raw_data"
-    
-    # REAL DEAL
-    orig_root="/data06/EmoReg/EmoReg/Data_collection/subs"
-    dest_root="/data06/EmoReg/EmoReg/Data_analysis/preprocessing/raw_data"
+    orig_root="${root}/data/PARREC"
+    dest_root="${root}/data/nii"    # make sure it already exists!
     
 
     # make one pass for ses-1 and another for ses-2
@@ -60,11 +56,11 @@ launch_octave_conversion() {
 
             orig=${orig_root}/sub-${sub}/ses-${ses}/${scan_type}
             dest=${dest_root}/sub-${sub}/ses-${ses}/${scan_type}
-            fmt=0   # 0 = .nii, 1 = .nii.gz - see all codes in dicm2nii.m
+            fmt=1   # 0 = .nii, 1 = .nii.gz - see all codes in dicm2nii.m
 
             # location of the dicm2nii folder containing dicm2nii.m
-            dicm2nii_path=/data06/EmoReg/EmoReg/Methods_and_materials/dicm2nii
-
+            dicm2nii_path="${root}/preproc/00_PARREC_2_NIFTI/dicm2nii"
+            
             # Destructive version : replaces every previous *dest* file/dir
             # NB : no *orig* folder are removed/replaced or otherwise modified in this
             [ -d ${dest} ] && rm -rf ${dest}

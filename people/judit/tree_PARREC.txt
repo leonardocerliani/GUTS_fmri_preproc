@@ -1,0 +1,51 @@
+data/PARREC/
+├── sub-035
+│   ├── ses-01
+│   │   ├── anat
+│   │   │   ├── sub-035_ses-01_WIP_Survey_1_1.PAR
+│   │   │   ├── sub-035_ses-01_WIP_Survey_1_1.REC
+│   │   │   ├── sub-035_ses-01_WIP_acq-3DTSE_T2w_6_1.PAR
+│   │   │   ├── sub-035_ses-01_WIP_acq-3DTSE_T2w_6_1.REC
+│   │   │   ├── sub-035_ses-01_WIP_acq-MPRAGE_T1w_5_1.PAR
+│   │   │   └── sub-035_ses-01_WIP_acq-MPRAGE_T1w_5_1.REC
+│   │   └── func
+│   │       ├── sub-035_ses-01_WIP_BOLD_EmoReg_run-01_2_1.PAR
+│   │       └── sub-035_ses-01_WIP_BOLD_EmoReg_run-01_2_1.REC
+│   └── ses-02
+│       └── func
+│           ├── sub-035_ses-02_WIP_BOLD_EmoReg_run-01_2_1.PAR
+│           └── sub-035_ses-02_WIP_BOLD_EmoReg_run-01_2_1.REC
+├── sub-051
+│   ├── ses-01
+│   │   ├── anat
+│   │   │   ├── sub-051_ses-01_WIP_Survey_1_1.PAR
+│   │   │   ├── sub-051_ses-01_WIP_Survey_1_1.REC
+│   │   │   ├── sub-051_ses-01_WIP_acq-3DTSE_T2w_6_1.PAR
+│   │   │   ├── sub-051_ses-01_WIP_acq-3DTSE_T2w_6_1.REC
+│   │   │   ├── sub-051_ses-01_WIP_acq-MPRAGE_T1w_5_1.PAR
+│   │   │   └── sub-051_ses-01_WIP_acq-MPRAGE_T1w_5_1.REC
+│   │   └── func
+│   │       ├── sub-051_ses-01_WIP_BOLD_EmoReg_run-01_2_1.PAR
+│   │       └── sub-051_ses-01_WIP_BOLD_EmoReg_run-01_2_1.REC
+│   └── ses-02
+│       └── func
+│           ├── sub-051_ses-02_WIP_BOLD_EmoReg_run-01_2_1.PAR
+│           └── sub-051_ses-02_WIP_BOLD_EmoReg_run-01_2_1.REC
+└── sub-089
+    ├── ses-01
+    │   ├── anat
+    │   │   ├── sub-089_ses-01_WIP_Survey_1_1.PAR
+    │   │   ├── sub-089_ses-01_WIP_Survey_1_1.REC
+    │   │   ├── sub-089_ses-01_WIP_acq-3DTSE_T2w_6_1.PAR
+    │   │   ├── sub-089_ses-01_WIP_acq-3DTSE_T2w_6_1.REC
+    │   │   ├── sub-089_ses-01_WIP_acq-MPRAGE_T1w_5_1.PAR
+    │   │   └── sub-089_ses-01_WIP_acq-MPRAGE_T1w_5_1.REC
+    │   └── func
+    │       ├── sub-089_ses-01_WIP_BOLD_EmoReg_run-01_2_1.PAR
+    │       └── sub-089_ses-01_WIP_BOLD_EmoReg_run-01_2_1.REC
+    └── ses-02
+        └── func
+            ├── sub-089_ses-02_WIP_BOLD_EmoReg_run-01_2_1.PAR
+            └── sub-089_ses-02_WIP_BOLD_EmoReg_run-01_2_1.REC
+
+18 directories, 30 files
