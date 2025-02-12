@@ -238,15 +238,15 @@ bidsmapper PARREC/ bids/
 ```
 If everything went well, you will be welcomed by the initial screen of bidsmapper.
 
-![](/imgs/bidsmapper_opening.png)
+![](imgs/bidsmapper_opening.png)
 
 From here, you can modify several options in the final naming scheme of the files, as well as the fields to input in the .json files. For instance, here I edit one bold sequence to shorten the final name, and to have an indication of the run. I also manually edit the TaskName field of the .json file (in the Metadata in the bottom right).
 
-![](/imgs/bidsmapper_edit.png)
+![](imgs/bidsmapper_edit.png)
 
 Then I do the same for all runs, so that the final screen looks as follows:
 
-![](/imgs/bidsmapper_final.png)
+![](imgs/bidsmapper_final.png)
 
 At this point I can save this setting. This will generate a `bidsmap.yaml` file with all the settings required for creating the bids structure / files
 
