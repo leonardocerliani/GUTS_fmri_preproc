@@ -15,6 +15,14 @@
 - [a true gem from the good'ole times : bash scripting tutorial by early FSL people](https://open.win.ox.ac.uk/pages/fslcourse/lectures/scripting/all.htm)
 - by [TechByCosta](https://www.youtube.com/watch?v=V_G2_uCE8ug)
 
+## use LLMs to ask questions about this repo!
+As this repo grows, it can be difficult to find the information you are looking for - or something you previously read in one of the pages and don't remember where it is.
+
+Fortunately, we live in the era of LLM chatbots, and they can help us with that.
+
+To make a github repo digestible by an LLM, you can use [gitingest](https://gitingest.com/). Simply replace `github.com` with `gitingest.com` in the repo you want to ask questions about - [example here](https://gitingest.com/leonardocerliani/GUTS_fmri_preproc/tree/main/TUT) - and then copy/paste the resulting text into your favourite LLM (e.g. Google AI Studio) and ask questions. Try for instance to ask the example above the following question: _"How do I convert into nifti a PAR/REC file whose acquisition has been aborted before the expected ending?"_
+
+
 ## setting up your account to work with fsl
 I don't know whether we will really manage to make a tutorial. For the moment, this is (aims to be) a collection of short snippets for dealing with focused issues.
 
