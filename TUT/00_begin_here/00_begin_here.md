@@ -13,6 +13,7 @@
 
 ## basic intro to linux terminal
 - [a true gem from the good'ole times : bash scripting tutorial by early FSL people](https://open.win.ox.ac.uk/pages/fslcourse/lectures/scripting/all.htm)
+- lots of gems on [Tom Nichols blog](https://blog.nisox.org/)
 - by [TechByCosta](https://www.youtube.com/watch?v=V_G2_uCE8ug)
 
 ## use LLMs to ask questions about this repo!
