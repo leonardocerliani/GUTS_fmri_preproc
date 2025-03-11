@@ -113,7 +113,7 @@ The chances of `uuidgen` (or any UUID version 4 generator) producing two identic
 
 A UUID version 4 has 128 bits of randomness, which means there are 2^128 (approximately 3.4 × 10^38) possible unique values. To put this in perspective:
 
-- That's 340 undecillion possible unique values
+- That's 340 undecillion (10^36) possible unique values
 - It's more than the number of stars in the observable universe (estimated at 10^24)
 - It's more than the number of grains of sand on Earth (estimated at 10^20)
 
