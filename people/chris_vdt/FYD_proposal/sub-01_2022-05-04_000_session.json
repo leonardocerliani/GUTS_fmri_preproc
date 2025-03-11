@@ -1,0 +1,15 @@
+{
+    "project": "EmotionInsula7T_project",
+    "dataset": "EmotionInsula7T",
+    "condition": "emofaces",
+    "subject": "sub-01",
+    "stimulus": "EmotionFaces",
+    "setup": "fMRI_7T",
+    "investigator": "CasTeurlings",
+    "date": "2022-05-04",
+    "version": "1.0",
+    "logfile": "sub-01_2022-05-04_000.log",
+    "comment": ""
+}
+
+
