@@ -17,4 +17,6 @@ If you like working with R, the [`papayaWidget` by the great John Muschelli](htt
 ## 03_preproc_FSL_HalfPipe
 A very basic tutorial about how to carry out preprocessing of fmri images (and registration to the T1w) using the FSL Feat GUI and HalfPipe
 
+## 04_bidscoin 
+Generating bids structure from PAR/REC files is (finally) a pleasant experience with [bidscoin](https://bidscoin.readthedocs.io/en/latest/). I also discuss how to handle PARs from aborted acquisitions and give a taste of how to use the generated bids structure in [BIDS apps](https://bids.neuroimaging.io//tools/bids-apps.html)
 
