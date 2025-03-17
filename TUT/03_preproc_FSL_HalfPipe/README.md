@@ -1,6 +1,6 @@
 # Preprocessing fmri and T1w data with FSL FEAT and HalfPipe
 
-_leonardo cerliani - 20250203_
+LC feb 2025
 
 We will see how to carry out a basic preprocessing of fmri images - and registration to the t1 (i.e. the anatomical image) - using the FSL Feat GUI interface. HP has the same parameters, which motivates introducing the preprocessing with FSL even if you intend to use only HP afterwards. 
 

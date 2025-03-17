@@ -1,5 +1,7 @@
 # Slicing 4D images
 
+LC jan 2025
+
 location: `data/one_sub`
 
 _I assume that you created a copy of the `orig_data` coming with this repo into a `data`, and then changed directory in there, that is:_
