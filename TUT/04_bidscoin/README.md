@@ -1,6 +1,6 @@
 # Bidscoin + trimming PAR files
 
-LC feb 2025
+LC mar 2025
 
 [bidscoin](https://bidscoin.readthedocs.io/en/latest/index.html) is a python software to generate bids-compliant nii starting from dcm and PAR/REC files. It is particularly interesting for us since this format is the most common in our lab (as we work on a Philips scanner).
 
