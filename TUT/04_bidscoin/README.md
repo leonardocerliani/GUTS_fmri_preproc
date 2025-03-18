@@ -400,6 +400,22 @@ data/bids/
 The last step is to make a check with the [bidsvalidator](https://bids-standard.github.io/bids-validator/). Everything looks fine - besides the extra data, that you can remove at your necessity if you need to use a BIDS app.
 
 
+## Deface (not yet tested)
+Bidscoin [can be installed with several plugins](https://bidscoin.readthedocs.io/en/latest/installation.html), including a wrapped for [pydeface](https://github.com/poldracklab/pydeface).
+
+**NB**: during the installation you might notice (in yellow) that these plugins are installed in a folder which might not be in the path, such as `/home/<user>/.local/bin`. To fix this you can e.g. do an `export PATH=$HOME/.local/bin:$PATH` before running bidscoin (like we did for dcm2niix above).
+
+For using `deface`, se at the bottom of the [tutorial page](https://bidscoin.readthedocs.io/en/latest/tutorial.html). `deface --help` also returns the usage. Apparently it might be as easy as running `deface bids/` where `bids/` is of course the directory which was created by the bidsmapper.
+
+**IMPORTANTLY, it is not clear from the documentation whether `deface` will also use the mask created to anonymize the T1w in order to anonymize the T2w images.**
+
+For this reason, it might be more convenient to use [`BIDSonym`](https://github.com/PeerHerholz/BIDSonym), referenced [here](https://bids.neuroimaging.io//faq/mri.html?h=deface#what-defacing-tools-can-i-use)
+
+However, I still did not have time to test these options.
+
+
+
+
 ## Bonus: running BIDS apps on the created structure
 
 At this point you can run [BIDS apps](https://bids.neuroimaging.io//tools/bids-apps.html) such as fmriprep or mriqc or [deface](https://bidscoin.readthedocs.io/en/latest/bidsapps.html#defacing) on the created `bids/` directory.
