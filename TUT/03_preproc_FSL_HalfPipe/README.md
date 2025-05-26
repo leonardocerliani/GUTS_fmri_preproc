@@ -221,4 +221,27 @@ As you can see, HP is using only 10 of the available 72 cores (actually threads)
 
 You will notice that HP creates a plethora of files and directories in the location where your raw data files are. The output is detailed on the [relevant section of the github repo](https://github.com/HALFpipe/HALFpipe?tab=readme-ov-file#outputs)
 
+### IMPORTANT : running fmriprep with a specific user
+Since we are using a docker container, all the directories and files created will be owned by `root`, therefore we cannot do anything with them. 
+
+To prevent this blockage, we can act in two ways:
+
+1. After fmriprep/halfpipe has finished, we point to the root dir (e.g. `bids`) and change the ownership recursively (NB: requires sudo)
+
+```bash
+sudo chown -R $USER:$USER bids
+```
+
+2. We run fmriprep/halfpipe with the current user (not tested with halfpipe yet), for instance
+
+```bash
+docker run -it --rm \
+  -v ${bidsdata}:/data/bids \
+  -v ${outputdir}:/data/derivatives \
+  -u $(id -u) \
+  fmriprep/fmriprep:23.1.3 fmriprep ${bidsdata} ${outputdir} --participant-label ${participant}
+  ```
+
+NB: I am not completely sure whether this would cause issues in case any of the docker containers should be re-run.
+
 That's all for now folks!
