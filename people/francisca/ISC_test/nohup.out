@@ -1,0 +1,70 @@
+INFO:__main__:verbosity set to Python logging level 'DEBUG'
+INFO:__main__:finished loading mask from './GM_mask_bin.nii.gz'
+DEBUG:__main__:input file '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0126_task-empmovie_run-1_setting-preproc_bold.nii.gz' NIfTI image is shape (97, 115, 97, 260)
+DEBUG:__main__:using affine and header from file '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0126_task-empmovie_run-1_setting-preproc_bold.nii.gz'
+INFO:__main__:finished loading data from '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0126_task-empmovie_run-1_setting-preproc_bold.nii.gz'
+DEBUG:__main__:input file '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0134_task-empmovie_run-1_setting-preproc_bold.nii.gz' NIfTI image is shape (97, 115, 97, 260)
+INFO:__main__:finished loading data from '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0134_task-empmovie_run-1_setting-preproc_bold.nii.gz'
+DEBUG:__main__:input file '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0168_task-empmovie_run-1_setting-preproc_bold.nii.gz' NIfTI image is shape (97, 115, 97, 260)
+INFO:__main__:finished loading data from '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0168_task-empmovie_run-1_setting-preproc_bold.nii.gz'
+DEBUG:__main__:input file '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0169_task-empmovie_run-1_setting-preproc_bold.nii.gz' NIfTI image is shape (97, 115, 97, 260)
+INFO:__main__:finished loading data from '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0169_task-empmovie_run-1_setting-preproc_bold.nii.gz'
+DEBUG:__main__:input file '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0171_task-empmovie_run-1_setting-preproc_bold.nii.gz' NIfTI image is shape (97, 115, 97, 260)
+INFO:__main__:finished loading data from '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0171_task-empmovie_run-1_setting-preproc_bold.nii.gz'
+DEBUG:__main__:input file '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0172_task-empmovie_run-1_setting-preproc_bold.nii.gz' NIfTI image is shape (97, 115, 97, 260)
+INFO:__main__:finished loading data from '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0172_task-empmovie_run-1_setting-preproc_bold.nii.gz'
+DEBUG:__main__:input file '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0176_task-empmovie_run-1_setting-preproc_bold.nii.gz' NIfTI image is shape (97, 115, 97, 260)
+INFO:__main__:finished loading data from '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0176_task-empmovie_run-1_setting-preproc_bold.nii.gz'
+DEBUG:__main__:input file '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0177_task-empmovie_run-1_setting-preproc_bold.nii.gz' NIfTI image is shape (97, 115, 97, 260)
+INFO:__main__:finished loading data from '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0177_task-empmovie_run-1_setting-preproc_bold.nii.gz'
+DEBUG:__main__:input file '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0180_task-empmovie_run-1_setting-preproc_bold.nii.gz' NIfTI image is shape (97, 115, 97, 260)
+INFO:__main__:finished loading data from '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0180_task-empmovie_run-1_setting-preproc_bold.nii.gz'
+DEBUG:__main__:input file '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0182_task-empmovie_run-1_setting-preproc_bold.nii.gz' NIfTI image is shape (97, 115, 97, 260)
+INFO:__main__:finished loading data from '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0182_task-empmovie_run-1_setting-preproc_bold.nii.gz'
+DEBUG:__main__:input file '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0224_task-empmovie_run-1_setting-preproc_bold.nii.gz' NIfTI image is shape (97, 115, 97, 260)
+INFO:__main__:finished loading data from '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0224_task-empmovie_run-1_setting-preproc_bold.nii.gz'
+DEBUG:__main__:input file '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0226_task-empmovie_run-1_setting-preproc_bold.nii.gz' NIfTI image is shape (97, 115, 97, 260)
+INFO:__main__:finished loading data from '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0226_task-empmovie_run-1_setting-preproc_bold.nii.gz'
+DEBUG:__main__:input file '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0234_task-empmovie_run-1_setting-preproc_bold.nii.gz' NIfTI image is shape (97, 115, 97, 260)
+INFO:__main__:finished loading data from '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0234_task-empmovie_run-1_setting-preproc_bold.nii.gz'
+DEBUG:__main__:input file '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0244_task-empmovie_run-1_setting-preproc_bold.nii.gz' NIfTI image is shape (97, 115, 97, 260)
+INFO:__main__:finished loading data from '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0244_task-empmovie_run-1_setting-preproc_bold.nii.gz'
+DEBUG:__main__:input file '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0249_task-empmovie_run-1_setting-preproc_bold.nii.gz' NIfTI image is shape (97, 115, 97, 260)
+INFO:__main__:finished loading data from '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0249_task-empmovie_run-1_setting-preproc_bold.nii.gz'
+DEBUG:__main__:input file '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0283_task-empmovie_run-1_setting-preproc_bold.nii.gz' NIfTI image is shape (97, 115, 97, 260)
+INFO:__main__:finished loading data from '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0283_task-empmovie_run-1_setting-preproc_bold.nii.gz'
+DEBUG:__main__:input file '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0297_task-empmovie_run-1_setting-preproc_bold.nii.gz' NIfTI image is shape (97, 115, 97, 260)
+INFO:__main__:finished loading data from '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0297_task-empmovie_run-1_setting-preproc_bold.nii.gz'
+DEBUG:__main__:input file '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0299_task-empmovie_run-1_setting-preproc_bold.nii.gz' NIfTI image is shape (97, 115, 97, 260)
+INFO:__main__:finished loading data from '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0299_task-empmovie_run-1_setting-preproc_bold.nii.gz'
+DEBUG:__main__:input file '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0301_task-empmovie_run-1_setting-preproc_bold.nii.gz' NIfTI image is shape (97, 115, 97, 260)
+INFO:__main__:finished loading data from '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0301_task-empmovie_run-1_setting-preproc_bold.nii.gz'
+DEBUG:__main__:input file '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0302_task-empmovie_run-1_setting-preproc_bold.nii.gz' NIfTI image is shape (97, 115, 97, 260)
+INFO:__main__:finished loading data from '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0302_task-empmovie_run-1_setting-preproc_bold.nii.gz'
+DEBUG:__main__:input file '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0307_task-empmovie_run-1_setting-preproc_bold.nii.gz' NIfTI image is shape (97, 115, 97, 260)
+INFO:__main__:finished loading data from '/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_data_MNI/sub-gutslei0307_task-empmovie_run-1_setting-preproc_bold.nii.gz'
+INFO:root:z-scored input data prior to computing ISCs
+/data00/leonardo/GUTS_fmri_preproc/people/francisca/ISC_test/isc_cli.py:244: RuntimeWarning: Mean of empty slice
+  np.nanmean(np.delete(data, s, axis=2),
+INFO:__main__:finished computing ISCs
+INFO:__main__:saved ISC output to ./results_ISC/sub-gutslei0126_task-empmovie_run-1_setting-preproc_bold_isc.nii.gz
+INFO:__main__:saved ISC output to ./results_ISC/sub-gutslei0134_task-empmovie_run-1_setting-preproc_bold_isc.nii.gz
+INFO:__main__:saved ISC output to ./results_ISC/sub-gutslei0168_task-empmovie_run-1_setting-preproc_bold_isc.nii.gz
+INFO:__main__:saved ISC output to ./results_ISC/sub-gutslei0169_task-empmovie_run-1_setting-preproc_bold_isc.nii.gz
+INFO:__main__:saved ISC output to ./results_ISC/sub-gutslei0171_task-empmovie_run-1_setting-preproc_bold_isc.nii.gz
+INFO:__main__:saved ISC output to ./results_ISC/sub-gutslei0172_task-empmovie_run-1_setting-preproc_bold_isc.nii.gz
+INFO:__main__:saved ISC output to ./results_ISC/sub-gutslei0176_task-empmovie_run-1_setting-preproc_bold_isc.nii.gz
+INFO:__main__:saved ISC output to ./results_ISC/sub-gutslei0177_task-empmovie_run-1_setting-preproc_bold_isc.nii.gz
+INFO:__main__:saved ISC output to ./results_ISC/sub-gutslei0180_task-empmovie_run-1_setting-preproc_bold_isc.nii.gz
+INFO:__main__:saved ISC output to ./results_ISC/sub-gutslei0182_task-empmovie_run-1_setting-preproc_bold_isc.nii.gz
+INFO:__main__:saved ISC output to ./results_ISC/sub-gutslei0224_task-empmovie_run-1_setting-preproc_bold_isc.nii.gz
+INFO:__main__:saved ISC output to ./results_ISC/sub-gutslei0226_task-empmovie_run-1_setting-preproc_bold_isc.nii.gz
+INFO:__main__:saved ISC output to ./results_ISC/sub-gutslei0234_task-empmovie_run-1_setting-preproc_bold_isc.nii.gz
+INFO:__main__:saved ISC output to ./results_ISC/sub-gutslei0244_task-empmovie_run-1_setting-preproc_bold_isc.nii.gz
+INFO:__main__:saved ISC output to ./results_ISC/sub-gutslei0249_task-empmovie_run-1_setting-preproc_bold_isc.nii.gz
+INFO:__main__:saved ISC output to ./results_ISC/sub-gutslei0283_task-empmovie_run-1_setting-preproc_bold_isc.nii.gz
+INFO:__main__:saved ISC output to ./results_ISC/sub-gutslei0297_task-empmovie_run-1_setting-preproc_bold_isc.nii.gz
+INFO:__main__:saved ISC output to ./results_ISC/sub-gutslei0299_task-empmovie_run-1_setting-preproc_bold_isc.nii.gz
+INFO:__main__:saved ISC output to ./results_ISC/sub-gutslei0301_task-empmovie_run-1_setting-preproc_bold_isc.nii.gz
+INFO:__main__:saved ISC output to ./results_ISC/sub-gutslei0302_task-empmovie_run-1_setting-preproc_bold_isc.nii.gz
+INFO:__main__:saved ISC output to ./results_ISC/sub-gutslei0307_task-empmovie_run-1_setting-preproc_bold_isc.nii.gz
