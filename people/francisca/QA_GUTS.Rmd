@@ -23,8 +23,8 @@ preproc_data_dir="/data00/leonardo/GUTS_fmri_preproc/people/francisca/preproc_da
 
 # List all files with T1w, mask, tsnr patterns
 files <- list.files(
-  preproc_data_dir,   
-  pattern = "sub-.*(desc-(preproc_T1w|brain_mask)|_tsnr)\\.nii\\.gz$", 
+  preproc_data_dir,
+  pattern = "sub-.*((desc-(preproc_T1w|brain_mask)|_tsnr|_isc)\\.nii\\.gz|_conf\\.svg)$",
   full.names = TRUE
 )
 
@@ -37,13 +37,15 @@ df <- tibble(file = files) %>%
     type = case_when(
       str_detect(filename, "desc-preproc_T1w") ~ "T1w",
       str_detect(filename, "desc-brain_mask") ~ "mask",
-      str_detect(filename, "tsnr") ~ "tsnr",
+      str_detect(filename, "_tsnr") ~ "tsnr",
+      str_detect(filename, "_isc") ~ "isc",
+      str_detect(filename, "\\.svg$") ~ "svg",       # <-- added this line
       TRUE ~ NA_character_
     )
   ) %>%
   filter(!is.na(type)) %>%
   select(sub_id, type, file) %>%
-  tidyr::pivot_wider(names_from = type, values_from = file)
+  pivot_wider(names_from = type, values_from = file)
 
 
 ui <- fluidPage(
@@ -75,7 +77,8 @@ server <- function(input, output, session) {
         papayaOptions(lut = "Grayscale"),
         papayaOptions(lut = "Red Overlay", alpha = 0.5, min = 0, max = 3)
       ),
-      interpolation = FALSE
+      interpolation = FALSE,
+      title = "pippo"
     )
   })
   
@@ -92,7 +95,8 @@ server <- function(input, output, session) {
         papayaOptions(lut = "Grayscale"),
         papayaOptions(lut = "Spectrum", alpha = 0.5, min = 0, max = 300)
       ),
-      interpolation = FALSE
+      interpolation = FALSE,
+      title = "paperino"
     )
   })
 }
@@ -100,5 +104,84 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 
 ```
+
+
+
+
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+
+df_qc <- read.table("reportvals.txt", header = TRUE, stringsAsFactors = FALSE) %>% 
+  filter(task == "empmovie") %>% 
+  select(sub, fd_mean, fd_perc, mean_gm_tsnr) %>% 
+  mutate(
+    sub = paste0("sub-", sub),
+    fd_mean = as.numeric(fd_mean),
+    fd_perc = as.numeric(fd_perc),
+    mean_gm_tsnr = as.numeric(mean_gm_tsnr)
+  ) %>%
+  rename(sub_id = sub) %>% 
+  mutate(
+    marker_size = log1p(fd_perc),
+    marker_size = ifelse(marker_size < 1, 1, marker_size)  # Ensure minimum size
+  )
+
+library(plotly)
+
+plot_ly(
+  df_qc,
+  x = ~fd_mean,
+  y = ~mean_gm_tsnr,
+  type = 'scatter',
+  mode = 'markers',
+  marker = list(
+    size = ~marker_size * 10,  # scale for visibility
+    sizemode = 'diameter',
+    color = 'lightblue',
+    opacity = 0.7
+  ),
+  text = ~paste0(
+    "Subject: ", sub_id, "<br>",
+    "FD Mean: ", round(fd_mean, 3), "<br>",
+    "% TR with FD > 0.4: ", round(fd_perc, 2), "<br>",
+    "Mean GM TSNR: ", round(mean_gm_tsnr, 1)
+  ),
+  hoverinfo = 'text'
+) %>%
+  layout(
+    title = "FD Mean vs GM TSNR (Marker size = % time point with FD > 0.4)",
+    xaxis = list(title = "FD Mean"),
+    yaxis = list(title = "Mean GM TSNR"),
+    showlegend = FALSE
+  ) %>%
+  config(displayModeBar = FALSE)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
