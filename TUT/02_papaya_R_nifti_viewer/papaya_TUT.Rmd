@@ -48,7 +48,8 @@ library(RNifti)
 # papaya widget github : https://github.com/muschellij2/papayaWidget
 # app code here: https://github.com/muschellij2/linked_viewer/blob/master/app.R
 
-bd_results = "/data00/leonardo/oda/GUTS_fmri_preproc/TUT/02_papaya"
+# bd_results = "/data00/leonardo/GUTS_fmri_preproc/TUT/02_papaya_R_nifti_viewer/"
+bd_results = ("./")
 
 ```
 
