@@ -4,26 +4,26 @@ LC October 2025 (in progress)
 
 
 
-[MRIcroGL](https://github.com/rordenlab/MRIcroGL) is great for doing any kind of slice-based visualization of MRI volumes (for surfaces, you might want to try [surf-ice](https://github.com/neurolabusc/surf-ice)).
+[MRIcroGL](https://github.com/rordenlab/MRIcroGL) is great for doing any kind of slice-based visualization of MRI volume slices (also volumes, but for surfaces, you might want to try [surf-ice](https://github.com/neurolabusc/surf-ice)).
 
 But it's even greater because it allows you to automate the creation of images using python scripts.
 
 ![mricrogl_script_interface.png](assets/mricrogl_script_interface.png)
 
-Admittedly the interface is not the greatest, as most of what you would find in a common text editor is not present, however it works fine, and you can actually edit your scripts in your favourite text editor and just copy paste them there
+Admittedly the interface is not the greatest, as most of what you would find in a common text editor is not present, however it works fine, and you can edit the python scripts in your favourite text editor before pasting them in the MRIcroGL script pane to run them.
 
 To run a script, open with the mri command and them
-CMD-N, paste the script, CMD-R
+CMD-N, paste the script, CMD-R (probably you have to replace CMD with Ctrl if you work in Linux or if you still insist on using windoze).
 
-Some References
+Some useful references to what is shown below:
 - https://github.com/rordenlab/MRIcroGL/blob/master/PYTHON.md
 - https://github.com/LeSasse/intro_to_mricrogl_scripting?tab=readme-ov-file
 
 
 
-# Case study: generate one image for each region in an Atlas
+# Case study: Generate one image for each region in an Atlas, so that the region is clearly visible in the image
 
-Since it uses python, we can combine the processing with whatever we can run in the terminal that produces an output we might use, for instance text.
+Since MRIcroGL uses python, we can combine the processing with whatever we can run in the terminal that produces an output we might use, for instance text.
 
 In this case, my aim was to:
 
@@ -31,27 +31,23 @@ In this case, my aim was to:
 - create the bmp of each region in MRIcroGL
 - in such a way that the view was centered on the center of gravity (COG) of the ROI
 
-The latter requirement is pretty important, since different ROIs can be in very different locations, therefore we want to adjust the field of view dynamically
+The latter requirement is pretty important, since different ROIs can be in very different locations, therefore we want to adjust the field of viewpoint of the image dynamically (i.e. the specific slices chosen to take the image).
 
-I started with a folder containing 4 atlases: AT, HO_cort, Yeo7 and Yeo17
+I started with a folder containing 4 atlases: AT, HO_cort, Yeo7 and Yeo17. What I show below is for Yeo7. You can use the other ones to test the procedures. You can also use your own created atlas / bunch of ROIs in a volume, as long as 
+
+- every region in the volume is encoded as an integer number
+- the nii.gz is of type FLOAT32 (for some reason fsl2ascii fails - i.e. returns a binary - if the image is of type INT8).
 
 ```
 .
 ├── AT
 │   ├── AT.nii.gz
-│   ├── rois
-│   └── rois_numba.txt
 ├── HO_cort
 │   ├── HO_cort.nii.gz
-│   ├── readme.md
-│   ├── rois
-│   └── rois_numba.txt
 ├── MNI152_T1_1mm_brain.nii.gz
 ├── README.md
 ├── Yeo17
 │   ├── Yeo17.nii.gz
-│   ├── rois
-│   └── rois_numba.txt
 ├── Yeo7
 │   ├── Yeo7.nii.gz
 │   ├── rois
@@ -124,7 +120,7 @@ At this poin we have all the images we need: one for each ROI, and we can load t
 
 
 
-In the repo I present the results only for the Yeo7 atlas and only for the last procedure below (3. Create all the ROIs at once). You can use the other two atlases (AT and Yeo17) to experiment, or also your own. The only important thing is that regions in the nii.gz should be encoded as numbers (what else...?) and that the nii.gz be FLOAT32 for fsl2ascii to work.  
+In the repo I present the results only for the Yeo7 atlas and only for the last procedure below (3. Create all the ROIs at once). You can use the other two atlases (AT and Yeo17) to experiment, or also your own. The only important thing is that regions in the nii.gz should be encoded as integer numbers  and that the nii.gz be FLOAT32 for fsl2ascii to work.  
 
 
 
@@ -185,9 +181,9 @@ gl.orthoviewmm(0,0,0)
 
 Here I tried another approach: load a single ROI and then save the bmp after estimating the COG.
 
-Since it is not possible to install additional libraries in the M's python environment, I cannot read directly from the stout. So I used a trick. To estimate the COG of the ROI, I used `fslstats [ROI_number].nii.gz -c > [tmp_file]`. This fsl utility estimates the COG. Then it's a piece of cake to read the coordinates from tmp file.
+Since it is not possible to install additional libraries in the M's python environment, I cannot read directly from the `stdout`. So I used a trick. To estimate the COG of the ROI, I used `fslstats [ROI_number].nii.gz -c > [tmp_file]`. This fsl utility estimates the COG of the image which is fed to it. Since our ROIs images only have 1's in the ROI and zeros elsewhere, we will get the COG of the ROI. Then it's a piece of cake to read the coordinates from the tmp file.
 
-_**NB** : Make sure you adjust the FOV first and that in the `Settings` the bmp are *not* saved with transparent background_
+_**NB** : Make sure that in the MRicroGL `Settings` the bmp are **not** saved with transparent background_
 
 ```python
 import gl
@@ -247,11 +243,11 @@ print(f"Screenshot saved to: {output_file}")
 Finally I took the interesting part from either approaches, and made a script that does the following for all ROIs at once
 
 - load the [ROI].nii.gz
-- estimate the COG using fslstats -c
+- estimate the COG using `fslstats -c`
 - save the bmp 
 - closes the overlay
 
-The last step is necessary otherwise they will accumulate, and therefore every next ROI bmp will actually contain _all the previously loaded ROIs_, which is not what we want.
+The last step is necessary otherwise ROIs will accumulate in the viewer (see version 1.), and therefore every next ROI bmp will actually contain _all the previously loaded ROIs_, which is not what we want.
 
 
 
@@ -318,7 +314,7 @@ for ROI_NUMBA, roi_name in enumerate(roi_files, start=1):
     gl.overlaycloseall()
 
 
-# Optionally, show all overlays after looping
+# Optional (but recommended): reset the view to 0,0,0 
 gl.shadername('overlay')
 gl.orthoviewmm(0,0,0)
 ```
