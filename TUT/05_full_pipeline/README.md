@@ -2,6 +2,19 @@
 
 LC apr 2025
 
+**NB**: actually there is _not_ a full preproc pipeline in this md. That was the initial intention, but it's not a task that can be accomplished in a couple of days.
+
+Instead here you can find:
+
+- bidscoin
+- trimming PAR file for aborted fmri acquisitions
+- bids validation
+- pydeface (short intro)
+- running bidsapp
+- fsl proposal
+
+Right now (Nov 2025) I am instead working on a proposal for a actual full pipeline keeping in mind the students' need in the `proposal.md` (again, _cum grano salis_, it's a work in progress).
+
 
 # Setting up the environment
 
