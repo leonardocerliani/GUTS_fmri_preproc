@@ -1,5 +1,7 @@
 # Proposal for a full preprocessing pipeline
 
+LC Nov 2025
+
 Very schematic work in progress.
 
 ## Architecture
