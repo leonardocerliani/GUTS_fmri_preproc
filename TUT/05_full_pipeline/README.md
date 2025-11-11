@@ -330,6 +330,13 @@ docker run -it --rm \
 
 
 ## fmriprep
+
+**NB**: to use a specific version of fmriprep read the [documentation on the nipreps website](https://www.nipreps.org/apps/docker/). The command has then more options than the one below.
+
+To pull a specific version of fmriprep: `docker pull nipreps/fmriprep:25.2.3`. Check the versions on the [nipreps dockerhub](https://hub.docker.com/u/nipreps).
+
+
+
 [Installation of the docker container via pip](https://fmriprep.org/en/stable/installation.html). Make sure you are inside your venv:
 
 ```bash
