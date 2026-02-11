@@ -1,0 +1,24 @@
+data/
+├── BSCMR130
+│   ├── sub-BSCMR130_space-MNI152NLin6Asym_res-2_desc-brain_mask.nii.gz
+│   ├── sub-BSCMR130_space-MNI152NLin6Asym_res-2_desc-preproc_T1w.nii.gz
+│   ├── sub-BSCMR130_space-MNI152NLin6Asym_res-2_dseg.nii.gz
+│   ├── sub-BSCMR130_task-ISC_desc-carpetplot_bold.svg
+│   ├── sub-BSCMR130_task-ISC_desc-confounds_timeseries.tsv
+│   └── sub-BSCMR130_task-ISC_space-MNI152NLin6Asym_res-2_desc-preproc_bold_tsnr.nii.gz
+├── BSCMR131
+│   ├── sub-BSCMR131_space-MNI152NLin6Asym_res-2_desc-brain_mask.nii.gz
+│   ├── sub-BSCMR131_space-MNI152NLin6Asym_res-2_desc-preproc_T1w.nii.gz
+│   ├── sub-BSCMR131_space-MNI152NLin6Asym_res-2_dseg.nii.gz
+│   ├── sub-BSCMR131_task-ISC_desc-carpetplot_bold.svg
+│   ├── sub-BSCMR131_task-ISC_desc-confounds_timeseries.tsv
+│   └── sub-BSCMR131_task-ISC_space-MNI152NLin6Asym_res-2_desc-preproc_bold_tsnr.nii.gz
+└── BSCMR132
+    ├── sub-BSCMR132_space-MNI152NLin6Asym_res-2_desc-brain_mask.nii.gz
+    ├── sub-BSCMR132_space-MNI152NLin6Asym_res-2_desc-preproc_T1w.nii.gz
+    ├── sub-BSCMR132_space-MNI152NLin6Asym_res-2_dseg.nii.gz
+    ├── sub-BSCMR132_task-ISC_desc-carpetplot_bold.svg
+    ├── sub-BSCMR132_task-ISC_desc-confounds_timeseries.tsv
+    └── sub-BSCMR132_task-ISC_space-MNI152NLin6Asym_res-2_desc-preproc_bold_tsnr.nii.gz
+
+3 directories, 18 files

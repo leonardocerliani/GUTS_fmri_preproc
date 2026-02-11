@@ -1,0 +1,69 @@
+---
+title: "Prepare mean FD and mean TSNR GM"
+author: "LC"
+date: "2026-02-11"
+output: html_document
+---
+
+```{r, message=FALSE}
+library(tidyverse)
+library(RNifti)
+
+library(RNifti)
+library(tidyverse)
+
+# ---- read subject list ----
+subj_list <- read_lines("list_subj.txt")
+
+# ---- function to process one subject ----
+process_subject <- function(subj) {
+  
+  # ---- paths ----
+  base_path <- file.path("data", subj)
+  
+  conf_path  <- file.path(base_path,
+    paste0("sub-", subj, "_task-ISC_desc-confounds_timeseries.tsv"))
+  
+  tsnr_path  <- file.path(base_path,
+    paste0("sub-", subj,
+           "_task-ISC_space-MNI152NLin6Asym_res-2_desc-preproc_bold_tsnr.nii.gz"))
+  
+  dseg_path  <- file.path(base_path,
+    paste0("sub-", subj,
+           "_space-MNI152NLin6Asym_res-2_dseg.nii.gz"))
+  
+  # ---- mean FD ----
+  confounds <- read_tsv(conf_path, show_col_types = FALSE)
+  
+  mean_FD <- mean(
+    as.numeric(na_if(confounds$framewise_displacement, "n/a")),
+    na.rm = TRUE
+  )
+  
+  # ---- mean TSNR in gray matter ----
+  tsnr_img <- readNifti(tsnr_path)
+  dseg_img <- readNifti(dseg_path)
+  
+  gm_mask <- dseg_img == 1
+  
+  mean_TSNR <- mean(tsnr_img[gm_mask], na.rm = TRUE)
+  
+  # ---- return tibble ----
+  tibble(
+    subj = subj,
+    mean_FD = mean_FD,
+    mean_TSNR = mean_TSNR
+  )
+}
+
+# ---- apply to all subjects ----
+results_df <- map_dfr(subj_list, process_subject)
+
+# ---- save ----
+write_csv(results_df, "QC_summary.csv")
+
+results_df
+
+
+```
+
