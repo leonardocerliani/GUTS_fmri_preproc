@@ -1,5 +1,7 @@
 ## Skull strip of T1w image
 
+<img src="assets/example_overlay.png" alt="example_overlay" width="600"/>
+
 Launch with:
 ```bash
 ./launch_skullstrip.sh
@@ -21,13 +23,17 @@ Skullstrip is carried out in docker with [SynthStrip](https://surfer.nmr.mgh.har
 user = ""  # instead of '-u %s:%s' % (os.getuid(), os.getgid())
 ```
 
-A quick and dirty quality check of the results can be carried out with:
+A quick and dirty quality check of the results can be carried out with the following:
 
 ```bash
 root="/dataGUTS2/GUTS/WP3/Data_analysis"
 imlist=$(find ${root} \( -name "*T1w_N4.nii.gz" -o -name "*T1w_N4_brain.nii.gz" \))
 slicesdir -o -e -0.1 ${imlist}
 ```
+
+Otherwise you can use (or adapt) the `do_overlay.sh` script which produces images like the one on top.
+This assumes you have [fsl](https://fsl.fmrib.ox.ac.uk/fsl/docs/) and pandoc.
+
 
 **Input looks like this**
 ```bash
