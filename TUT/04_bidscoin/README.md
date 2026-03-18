@@ -316,7 +316,8 @@ data/bids/
 Note that you can reopen the same file later and make modifications using the `bidseditor <bidscoin_bids_directory>`. In particular, it can be a good idea to run the bidsmapper only on a couple of participants to make the appropriate edits to the bidsmap.yml, and then - when you are happy with the result - re-run it on the whole set of participants.
 
 ### IMPORTANT ISSUE: repetition time for MPRAGE
-<span style="color:red;"><strong>This issue has been fixed in v 4.6.2 - 2025-06-19</strong></span>
+> [!NOTE]
+> This issue has been fixed in v 4.6.2.
 
 The bidsmapper scans the header of all the files of a similar kind (e.g. MPRAGE, BOLD, T2W) across subjects to find similarities. If the crucial information in the header are the same, the bidsmapper can "understand" how to process the same image across subjects.
 
