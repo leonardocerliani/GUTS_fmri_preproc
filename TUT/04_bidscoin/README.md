@@ -1,6 +1,6 @@
 # Bidscoin + trimming PAR files
 
-LC mar 2025
+LC feb 2025
 
 [bidscoin](https://bidscoin.readthedocs.io/en/latest/index.html) is a python software to generate bids-compliant nii starting from dcm and PAR/REC files. It is particularly interesting for us since this format is the most common in our lab (as we work on a Philips scanner).
 
@@ -316,6 +316,8 @@ data/bids/
 Note that you can reopen the same file later and make modifications using the `bidseditor <bidscoin_bids_directory>`. In particular, it can be a good idea to run the bidsmapper only on a couple of participants to make the appropriate edits to the bidsmap.yml, and then - when you are happy with the result - re-run it on the whole set of participants.
 
 ### IMPORTANT ISSUE: repetition time for MPRAGE
+<span style="color:red;"><strong>This issue has been fixed in v 4.6.2 - 2025-06-19</strong></span>
+
 The bidsmapper scans the header of all the files of a similar kind (e.g. MPRAGE, BOLD, T2W) across subjects to find similarities. If the crucial information in the header are the same, the bidsmapper can "understand" how to process the same image across subjects.
 
 However in our case the repetition time of the MPRAGE was different across subjects. This lead to the problem that MPRAGE PARs of different subjects could not be recognized.
@@ -337,60 +339,68 @@ This is how the resulting `bids` directory looks for my sample data:
 <details><summary> bids directory after bidscoiner</summary>
 
 ```
-data/bids/
+data/bids
 ├── README
 ├── code
-│   └── bidscoin
-│       ├── bidscoiner.errors
-│       ├── bidscoiner.log
-│       ├── bidscoiner.tsv
-│       ├── bidsmap.yaml
-│       ├── bidsmapper.errors
-│       └── bidsmapper.log
+│   └── bidscoin
+│       ├── bidscoiner.errors
+│       ├── bidscoiner.log
+│       ├── bidscoiner.tsv
+│       ├── bidseditor.errors
+│       ├── bidseditor.log
+│       ├── bidsmap.yaml
+│       ├── bidsmapper.errors
+│       └── bidsmapper.log
 ├── dataset_description.json
 ├── participants.json
 ├── participants.tsv
 ├── sub-020
-│   ├── anat
-│   │   ├── sub-020_acq-WIPacq3DTSE_rec-EmoReg_T2w.json
-│   │   ├── sub-020_acq-WIPacq3DTSE_rec-EmoReg_T2w.nii.gz
-│   │   ├── sub-020_acq-WIPacqMPRAGE_rec-EmoReg_T1w.json
-│   │   ├── sub-020_acq-WIPacqMPRAGE_rec-EmoReg_T1w.nii.gz
-│   │   ├── sub-020_acq-WIPt1w1mmsag1m56CS_rec-EmoReg_T1w.json
-│   │   └── sub-020_acq-WIPt1w1mmsag1m56CS_rec-EmoReg_T1w.nii.gz
-│   ├── extra_data
-│   │   ├── sub-020_acq-AxialT1Reformat1x1x3_rec-T1TFE_EmoReg.json
-│   │   ├── sub-020_acq-AxialT1Reformat1x1x3_rec-T1TFE_EmoReg.nii.gz
-│   │   ├── sub-020_acq-CoronalT1Reformat1x1x3_rec-T1TFE_EmoReg.json
-│   │   ├── sub-020_acq-CoronalT1Reformat1x1x3_rec-T1TFE_EmoReg.nii.gz
-│   │   ├── sub-020_acq-WIPSurvey_rec-T1TFE_run-1_EmoReg.json
-│   │   ├── sub-020_acq-WIPSurvey_rec-T1TFE_run-1_EmoReg.nii.gz
-│   │   ├── sub-020_acq-WIPSurvey_rec-T1TFE_run-2_EmoReg.json
-│   │   └── sub-020_acq-WIPSurvey_rec-T1TFE_run-2_EmoReg.nii.gz
-│   ├── func
-│   │   ├── sub-020_task-EmoReg_run-01_bold.json
-│   │   ├── sub-020_task-EmoReg_run-01_bold.nii.gz
-│   │   ├── sub-020_task-EmoReg_run-02_bold.json
-│   │   ├── sub-020_task-EmoReg_run-02_bold.nii.gz
-│   │   ├── sub-020_task-EmoReg_run-03_bold.json
-│   │   ├── sub-020_task-EmoReg_run-03_bold.nii.gz
-│   │   ├── sub-020_task-EmoReg_run-04_bold.json
-│   │   ├── sub-020_task-EmoReg_run-04_bold.nii.gz
-│   │   ├── sub-020_task-EmoReg_run-05_bold.json
-│   │   ├── sub-020_task-EmoReg_run-05_bold.nii.gz
-│   │   ├── sub-020_task-EmoReg_run-2_bold.json
-│   │   ├── sub-020_task-EmoReg_run-2_bold.nii.gz
-│   │   ├── sub-020_task-EmoReg_run-3_bold.json
-│   │   ├── sub-020_task-EmoReg_run-3_bold.nii.gz
-│   │   ├── sub-020_task-EmoReg_run-4_bold.json
-│   │   ├── sub-020_task-EmoReg_run-4_bold.nii.gz
-│   │   ├── sub-020_task-EmoReg_run-5_bold.json
-│   │   ├── sub-020_task-EmoReg_run-5_bold.nii.gz
-│   │   ├── sub-020_task-EmoReg_run-6_bold.json
-│   │   └── sub-020_task-EmoReg_run-6_bold.nii.gz
-│   └── sub-020_scans.tsv
+│   ├── ses-01
+│   │   ├── anat
+│   │   │   ├── sub-020_ses-01_acq-WIPacq3DTSE_rec-EmoReg_T2w.json
+│   │   │   ├── sub-020_ses-01_acq-WIPacq3DTSE_rec-EmoReg_T2w.nii.gz
+│   │   │   ├── sub-020_ses-01_acq-WIPacqMPRAGE_rec-EmoReg_T1w.json
+│   │   │   └── sub-020_ses-01_acq-WIPacqMPRAGE_rec-EmoReg_T1w.nii.gz
+│   │   ├── beh
+│   │   │   ├── sub-020_ses-01_run-1_events.tsv
+│   │   │   ├── sub-020_ses-01_run-2_events.tsv
+│   │   │   ├── sub-020_ses-01_run-3_events.tsv
+│   │   │   ├── sub-020_ses-01_run-4_events.tsv
+│   │   │   └── sub-020_ses-01_run-5_events.tsv
+│   │   ├── func
+│   │   │   ├── sub-020_ses-01_task-EmoReg_acq-EmoReg_run-01_bold.json
+│   │   │   ├── sub-020_ses-01_task-EmoReg_acq-EmoReg_run-01_bold.nii.gz
+│   │   │   ├── sub-020_ses-01_task-EmoReg_acq-EmoReg_run-02_bold.json
+│   │   │   ├── sub-020_ses-01_task-EmoReg_acq-EmoReg_run-02_bold.nii.gz
+│   │   │   ├── sub-020_ses-01_task-EmoReg_acq-EmoReg_run-03_bold.json
+│   │   │   ├── sub-020_ses-01_task-EmoReg_acq-EmoReg_run-03_bold.nii.gz
+│   │   │   ├── sub-020_ses-01_task-EmoReg_acq-EmoReg_run-04_bold.json
+│   │   │   ├── sub-020_ses-01_task-EmoReg_acq-EmoReg_run-04_bold.nii.gz
+│   │   │   ├── sub-020_ses-01_task-EmoReg_acq-EmoReg_run-05_bold.json
+│   │   │   └── sub-020_ses-01_task-EmoReg_acq-EmoReg_run-05_bold.nii.gz
+│   │   └── sub-020_ses-01_scans.tsv
+│   └── ses-02
+│       ├── beh
+│       │   ├── sub-020_ses-02_run-1_events.tsv
+│       │   ├── sub-020_ses-02_run-2_events.tsv
+│       │   ├── sub-020_ses-02_run-3_events.tsv
+│       │   ├── sub-020_ses-02_run-4_events.tsv
+│       │   └── sub-020_ses-02_run-5_events.tsv
+│       ├── func
+│       │   ├── sub-020_ses-02_task-EmoReg_acq-EmoReg_run-01_bold.json
+│       │   ├── sub-020_ses-02_task-EmoReg_acq-EmoReg_run-01_bold.nii.gz
+│       │   ├── sub-020_ses-02_task-EmoReg_acq-EmoReg_run-02_bold.json
+│       │   ├── sub-020_ses-02_task-EmoReg_acq-EmoReg_run-02_bold.nii.gz
+│       │   ├── sub-020_ses-02_task-EmoReg_acq-EmoReg_run-03_bold.json
+│       │   ├── sub-020_ses-02_task-EmoReg_acq-EmoReg_run-03_bold.nii.gz
+│       │   ├── sub-020_ses-02_task-EmoReg_acq-EmoReg_run-04_bold.json
+│       │   ├── sub-020_ses-02_task-EmoReg_acq-EmoReg_run-04_bold.nii.gz
+│       │   ├── sub-020_ses-02_task-EmoReg_acq-EmoReg_run-05_bold.json
+│       │   └── sub-020_ses-02_task-EmoReg_acq-EmoReg_run-05_bold.nii.gz
+│       └── sub-020_ses-02_scans.tsv
 ├── sub-040
-│   ├── anat
+│   ├── ses-01
+│   │   ├── anat
 
 ```
 
@@ -398,22 +408,6 @@ data/bids/
 
 \
 The last step is to make a check with the [bidsvalidator](https://bids-standard.github.io/bids-validator/). Everything looks fine - besides the extra data, that you can remove at your necessity if you need to use a BIDS app.
-
-
-## Deface (not yet tested)
-Bidscoin [can be installed with several plugins](https://bidscoin.readthedocs.io/en/latest/installation.html), including a wrapped for [pydeface](https://github.com/poldracklab/pydeface).
-
-**NB**: during the installation you might notice (in yellow) that these plugins are installed in a folder which might not be in the path, such as `/home/<user>/.local/bin`. To fix this you can e.g. do an `export PATH=$HOME/.local/bin:$PATH` before running bidscoin (like we did for dcm2niix above).
-
-For using `deface`, se at the bottom of the [tutorial page](https://bidscoin.readthedocs.io/en/latest/tutorial.html). `deface --help` also returns the usage. Apparently it might be as easy as running `deface bids/` where `bids/` is of course the directory which was created by the bidsmapper.
-
-**IMPORTANTLY, it is not clear from the documentation whether `deface` will also use the mask created to anonymize the T1w in order to anonymize the T2w images.**
-
-For this reason, it might be more convenient to use [`BIDSonym`](https://github.com/PeerHerholz/BIDSonym), referenced [here](https://bids.neuroimaging.io//faq/mri.html?h=deface#what-defacing-tools-can-i-use)
-
-However, I still did not have time to test these options.
-
-
 
 
 ## Bonus: running BIDS apps on the created structure
