@@ -6,9 +6,9 @@
 # Origin
 root_orig="/data00/EmoReg_running_analyses/preprocessing_2026"
 
-data_orig="${root_orig}/source_data/bids_LC/data/sub-001/ses-01/func"
+data_orig="${root_orig}/source_data/bids_LC/data"
 
-onsets_orig= : "${root_orig}/derivative_1T1w/fsl_events"
+onsets_orig="${root_orig}/derivative_1T1w/fsl_events"
 
 # Destination
 data_dest="/data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/data"
