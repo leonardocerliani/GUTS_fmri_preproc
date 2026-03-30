@@ -1,0 +1,92 @@
+
+════════════════════════════════════════════════════════
+  Design file check
+  Subject list : /data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/scripts/1st_level_analysis/../list_subj.txt
+  Log          : /data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/scripts/1st_level_analysis/logs/check_designs.log
+════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────
+│  Subject : sub-001
+│  FSF     : /data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/data/sub-001/func/design_sub-001.fsf
+├─────────────────────────────────────────────────────────────
+│  outputdir      : /data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/data/sub-001/func/sub-001_task-EmoReg_bold.feat
+│  npts           : 4134
+│  regstandard    : /data00/leonardo/warez/fsl/data/standard/MNI152_T1_2mm_brain
+│  reg nonlinear  : 0  (linear)
+│  totalVoxels    : 1058304000
+│  feat_files(1)  : /data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/data/sub-001/func/sub-001_task-EmoReg_bold
+│  highres_files  : /data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/data/sub-001/anat/sub-001_ses-01_acq-WIPacqMPRAGE_rec-EmoReg_1mm_T1w_brain
+│  prewhitening   : 0  (OFF (OLS — fast but autocorrelation not corrected))
+├─────────────────────────────────────────────────────────────
+│  npts         : FSF=4134  fslinfo dim4=4134  → CORRECT
+│  totalVoxels  : FSF=1058304000  computed=1058304000  (80×80×40×4134)  → CORRECT
+└─────────────────────────────────────────────────────────────
+
+┌─────────────────────────────────────────────────────────────
+│  Subject : sub-002
+│  FSF     : /data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/data/sub-002/func/design_sub-002.fsf
+├─────────────────────────────────────────────────────────────
+│  outputdir      : /data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/data/sub-002/func/sub-002_task-EmoReg_bold.feat
+│  npts           : 4456
+│  regstandard    : /data00/leonardo/warez/fsl/data/standard/MNI152_T1_2mm_brain
+│  reg nonlinear  : 0  (linear)
+│  totalVoxels    : 1140736000
+│  feat_files(1)  : /data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/data/sub-002/func/sub-002_task-EmoReg_bold
+│  highres_files  : /data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/data/sub-002/anat/sub-002_ses-01_acq-WIPacqMPRAGE_rec-EmoReg_1mm_T1w_brain
+│  prewhitening   : 0  (OFF (OLS — fast but autocorrelation not corrected))
+├─────────────────────────────────────────────────────────────
+│  npts         : FSF=4456  fslinfo dim4=4456  → CORRECT
+│  totalVoxels  : FSF=1140736000  computed=1140736000  (80×80×40×4456)  → CORRECT
+└─────────────────────────────────────────────────────────────
+
+┌─────────────────────────────────────────────────────────────
+│  Subject : sub-003
+│  FSF     : /data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/data/sub-003/func/design_sub-003.fsf
+├─────────────────────────────────────────────────────────────
+│  outputdir      : /data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/data/sub-003/func/sub-003_task-EmoReg_bold.feat
+│  npts           : 4387
+│  regstandard    : /data00/leonardo/warez/fsl/data/standard/MNI152_T1_2mm_brain
+│  reg nonlinear  : 0  (linear)
+│  totalVoxels    : 1123072000
+│  feat_files(1)  : /data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/data/sub-003/func/sub-003_task-EmoReg_bold
+│  highres_files  : /data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/data/sub-003/anat/sub-003_ses-01_acq-WIPacqMPRAGE_rec-EmoReg_1mm_T1w_brain
+│  prewhitening   : 0  (OFF (OLS — fast but autocorrelation not corrected))
+├─────────────────────────────────────────────────────────────
+│  npts         : FSF=4387  fslinfo dim4=4387  → CORRECT
+│  totalVoxels  : FSF=1123072000  computed=1123072000  (80×80×40×4387)  → CORRECT
+└─────────────────────────────────────────────────────────────
+
+┌─────────────────────────────────────────────────────────────
+│  Subject : sub-004
+│  FSF     : /data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/data/sub-004/func/design_sub-004.fsf
+├─────────────────────────────────────────────────────────────
+│  outputdir      : /data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/data/sub-004/func/sub-004_task-EmoReg_bold.feat
+│  npts           : 4429
+│  regstandard    : /data00/leonardo/warez/fsl/data/standard/MNI152_T1_2mm_brain
+│  reg nonlinear  : 0  (linear)
+│  totalVoxels    : 1133824000
+│  feat_files(1)  : /data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/data/sub-004/func/sub-004_task-EmoReg_bold
+│  highres_files  : /data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/data/sub-004/anat/sub-004_ses-01_acq-WIPacqMPRAGE_rec-EmoReg_1mm_T1w_brain
+│  prewhitening   : 0  (OFF (OLS — fast but autocorrelation not corrected))
+├─────────────────────────────────────────────────────────────
+│  npts         : FSF=4429  fslinfo dim4=4429  → CORRECT
+│  totalVoxels  : FSF=1133824000  computed=1133824000  (80×80×40×4429)  → CORRECT
+└─────────────────────────────────────────────────────────────
+
+┌─────────────────────────────────────────────────────────────
+│  Subject : sub-005
+│  FSF     : /data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/data/sub-005/func/design_sub-005.fsf
+├─────────────────────────────────────────────────────────────
+│  outputdir      : /data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/data/sub-005/func/sub-005_task-EmoReg_bold.feat
+│  npts           : 3622
+│  regstandard    : /data00/leonardo/warez/fsl/data/standard/MNI152_T1_2mm_brain
+│  reg nonlinear  : 0  (linear)
+│  totalVoxels    : 927232000
+│  feat_files(1)  : /data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/data/sub-005/func/sub-005_task-EmoReg_bold
+│  highres_files  : /data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/data/sub-005/anat/sub-005_ses-01_acq-WIPacqMPRAGE_rec-EmoReg_1mm_T1w_brain
+│  prewhitening   : 0  (OFF (OLS — fast but autocorrelation not corrected))
+├─────────────────────────────────────────────────────────────
+│  npts         : FSF=3622  fslinfo dim4=3622  → CORRECT
+│  totalVoxels  : FSF=927232000  computed=927232000  (80×80×40×3622)  → CORRECT
+└─────────────────────────────────────────────────────────────
+

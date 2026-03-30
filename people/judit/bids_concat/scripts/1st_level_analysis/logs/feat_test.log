@@ -1,0 +1,21 @@
+nohup: ignoring input
+
+════════════════════════════════════════════════════════
+  Running FEAT (max 5 parallel jobs)
+  Subject list : /data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/scripts/1st_level_analysis/../list_subj.txt
+════════════════════════════════════════════════════════
+
+[sub-001] 11:33:02  Starting FEAT ...
+[sub-002] 11:33:02  Starting FEAT ...
+[sub-003] 11:33:02  Starting FEAT ...
+[sub-004] 11:33:02  Starting FEAT ...
+[sub-005] 11:33:02  Starting FEAT ...
+[sub-005] 15:04:39  FEAT done.
+[sub-001] 15:32:01  FEAT done.
+[sub-004] 15:51:37  FEAT done.
+[sub-002] 15:58:03  FEAT done.
+[sub-003] 15:59:51  FEAT done.
+
+════════════════════════════════════════════════════════
+  All FEAT runs complete.
+════════════════════════════════════════════════════════

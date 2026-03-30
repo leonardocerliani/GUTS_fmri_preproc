@@ -1,0 +1,8 @@
+choice_more_money    : outcome_Conflict_Your_choice_events > outcome_Conflict_More_money_events
+choice_less_money    : outcome_Conflict_Your_choice_events > outcome_Conflict_Less_money_events
+choice_more_pain     : outcome_Conflict_Your_choice_events > outcome_Conflict_More_pain_events
+choice_less_pain     : outcome_Conflict_Your_choice_events > outcome_Conflict_Less_pain_events
+more_pain_less_pain  : outcome_Conflict_More_pain_events > outcome_Conflict_Less_pain_events
+more_money_less_money : outcome_Conflict_More_money_events > outcome_Conflict_Less_money_events
+more_pain_more_money : outcome_Conflict_More_pain_events > outcome_Conflict_More_money_events
+less_money_less_pain : outcome_Conflict_Less_money_events > outcome_Conflict_Less_pain_events
