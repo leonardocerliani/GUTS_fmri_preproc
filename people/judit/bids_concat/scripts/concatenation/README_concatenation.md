@@ -6,6 +6,8 @@ one FSL 3-column EV file per predictor with onset times correctly shifted to be 
 the start of the concatenated timeseries. It also writes 10 run-regressor EV files to use
 as nuisance regressors in FEAT to account for between-run baseline shifts.
 
+⚠️ The concatenation done here is very blunt - just concat the original fmri nii.gz. For a proper concatenation you should first (at least) register to the T1w the runs which were acquired in a session where the T1w image was not acquired. I suggest _not_ to carry out preprocessing of the single runs because the outcome will not substantially differ wrt preprocessing the concatenated dataset (and it would make the pipeline unnecessarily more complicated).
+
 ---
 
 ## Run in parallel (all subjects)

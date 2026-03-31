@@ -37,6 +37,34 @@ bids_concat/data/<sub>/
 
 ---
 
+## Pre-requirements
+See the main `README.md` in this repo.
+
+## Overview of the pipeline
+- The user generates a sample `design_example.fsf` using the Feat GUI (launch with `Feat` from the terminal)
+    - the design must contain at least two predictors and one contrast
+
+- Edit the `list_predictors.csv` and `list_contrasts.txt`. Make sure that the names are _exactly_ as those in the predictors' `.mat` file you have saved for each subject.
+
+- Adjust the `Paths` section of `build_design_fsf.py` according to where your data is. Note that it is assumed that the predictors' `.mat` files are in a subdirectory `beh` of each subject's data, e.g. `data/sub-001/beh/`
+
+- Run the `run_build_design_fsf.sh`, which calls `build_design_fsf.py`. This will produce a `design_sub-[sub number]` for each subject in `list_subj.txt` and place it in the same directory where the concatenated fmri nii.gz is, for instance:
+
+```bash
+data/sub-003
+├── anat
+├── beh
+└── func/
+    ├── design_sub-003.fsf
+    ├── sub-001_task-EmoReg_bold.feat
+    └── sub-001_task-EmoReg_bold.nii.gz
+```
+
+- Run the `run_check_designs.sh` after adjusting the location of `data_root` and `list_subj.txt`. This will produce a text file `./logs/check_design.log` where you can inspect all important file location and information to ensure that the designs have been correctly created and therefore feat will run with (hopefully) no problems.
+
+- Once everything is ready you can run `run_feat.sh` to run feat. You can also adjust the `N_PARALLEL=5` parameter to decide how many subjects will be processed in parallel (be considerate).
+
+
 ## Customising the design
 
 ### Add / remove EVs
@@ -53,6 +81,8 @@ name : positive_EV_name > negative_EV_name
 ```
 EV names are matched case-insensitively; the `_events` suffix is optional.
 
+⚠️ Make sure you use only `>`, e.g. A > B. For A < B create a new line B > A.
+
 ---
 
 ## Running the analysis
@@ -60,14 +90,14 @@ EV names are matched case-insensitively; the `_events` suffix is optional.
 ### Step 1 — generate per-subject design files
 
 ```bash
-cd /data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/scripts
-bash 1st_level_analysis/run_build_design_fsf.sh
+cd /data00/leonardo/GUTS_fmri_preproc/people/judit/bids_concat/scripts/1st_level_analysis
+bash run_build_design_fsf.sh
 ```
 
 ### Step 2 — (optional) validate design files
 
 ```bash
-bash 1st_level_analysis/run_check_designs.sh
+bash run_check_designs.sh
 ```
 
 Prints for each subject:
@@ -78,10 +108,10 @@ Prints for each subject:
 
 ```bash
 # All subjects — nohup (survives connection drops):
-nohup bash 1st_level_analysis/run_feat.sh > logs/feat.log 2>&1 &
+nohup bash run_feat.sh > logs/feat.log 2>&1 &
 
 # Custom subject list:
-nohup bash 1st_level_analysis/run_feat.sh 1st_level_analysis/mini_list_subj.txt \
+nohup bash run_feat.sh 1st_level_analysis/mini_list_subj.txt \
     > logs/feat_mini.log 2>&1 &
 ```
 
@@ -131,24 +161,24 @@ python3 1st_level_analysis/build_design_fsf.py
 
 ---
 
-## Quick pipeline test (copy-paste blocks)
+## Snippets to try iterations of a TEST pipeline.
+**⚠️ CAREFUL! These snippets are ONLY for testing the pipeline until it's known that it works!**\
+**If there are existing .feat directories with previous results, they will be deleted!**
 
 See `do_test_cropped_fmri_data.sh` for interactive blocks:
 
 | Block | Action |
 |-------|--------|
-| **0** | Remove any existing `.feat` directories |
-| **1** | Backup full files + crop to 100 volumes (parallel) |
-| **2** | Rebuild FSFs + launch FEAT in background |
-| **3** | Restore full fMRI files (parallel) |
+| **0** | Kill running feat processes |
+| **1** | Remove existing .feat directories |
+| **2** | Rebuild design_sub-[sub number].fsf |
+| **3** | Run all designs in parallel batches |
 
-> ⚠️ The cropped-data approach only works for **preprocessing-only** FSFs
-> (`stats_yn = 0`). With the full GLM enabled, FEAT aborts immediately
-> because 100 TRs leave near-zero degrees of freedom.
 
 ---
 
-## FEAT output location
+## Current FEAT output location
+Modify according to your preferences and needs.
 
 ```
 bids_concat/data/<sub>/func/<sub>_task-EmoReg_bold.feat/

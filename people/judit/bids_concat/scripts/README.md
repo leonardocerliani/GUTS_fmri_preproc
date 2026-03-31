@@ -18,6 +18,10 @@ FSL onset files - one for each predictor, with `.mat` extension - were created f
 
 The format is the 3-column format of fsl predictor files, with columns for `onset time | duration | intensity`
 
+
+## Be careful to the following!
+We are in a testing phase, hence the many warnings...
+
 ⚠️ **There are 10 fmri acquisitions across two sessions. In this initial exploration, they have been concatenated _without_ registering the scans in the second session to the T1w. This will need to be added later** 
 
 ⚠️ **For testing purposes only _linear_ registration has been carried out to save on time, however the files for nonlinear registration are already in place, and one should just switch it on in the `design_example.fsf`** (see below in `1st_level_analysis`)
@@ -26,6 +30,26 @@ The format is the 3-column format of fsl predictor files, with columns for `onse
 
 ⚠️ **Before running any python script - or shell script that calls a python script - make sure you activated the appropriate venv** which in this case is called `venv_judit` and can be recreated (python 3.10+) using the `requirements.txt` file
 
+⚠️ **These tests were succesfully run on `\data00`. It is possible that something needs to be adjusted when running on the network-mounted windoze disks**
+
+
+## Pre-requirements
+An active python (3.10+) virtual environment (`venv`) where the `requirements.txt` have been installed
+```bash
+python -m venv venv_judit
+source venv_judit/bin/activate
+pip install -r requirements.txt
+```
+
+Make sure that [FSL](https://fsl.fmrib.ox.ac.uk/fsl/docs/) is installed and available in the path. For instance check that the following lines are in your `~/.bashrc` file (linux) or `~/.bash_profile` (Mac). This is usually created automatically after the [installation of fsl](https://fsl.fmrib.ox.ac.uk/fsl/docs/install/index.html).
+
+```bash
+FSLDIR=/usr/local/fsl
+
+PATH=${FSLDIR}/share/fsl/bin:${PATH}
+export FSLDIR PATH
+. ${FSLDIR}/etc/fslconf/fsl.sh
+```
 
 
 ## Overview
@@ -34,6 +58,8 @@ The format is the 3-column format of fsl predictor files, with columns for `onse
 - **skull_stripping** : carried out with `synthstrip`. The original T1w was first reoriented to standard orientation and then resampled to 1mm to speed up the registration. The original volume has been preserved
 
 - **1st_level_analysis** : actually here there is both preprocessing and 1st level analysis
+
+- **group_level_analysis** : takes the `.feat` directories of the results of the 1st level analysis and carries out a simple group-mean analysis.
 
 There are dedicated README files for concatenation and skull stripping in the corresponding directories, therefore in the following we will focus on the preparation and running of the preprocessing and first level analysis
 
