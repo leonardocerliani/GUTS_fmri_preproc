@@ -114,14 +114,14 @@ If you understand a bit of fmri data or fmri data analysis and are mindful about
 
 A minimal pipeline is the following, assuming you already have your data preprocessed with fsl feat (which again unfortunately requires very concise scripting efforts).
 
-```
+```bash
 # fd (before mcflirt)
 fsl_motion_outliers -i fmri -m mask.nii.gz --fd -s fd.txt -o fd_4scrub.txt
 
 # do feat preprocessing and then get the files from the .feat directory
 
 # get the motion parameters from the feat preproc output
-awk '{print $1,$2,$3,$4,$5,$6}' motion.par > motion6.txt
+awk '{print $1,$2,$3,$4,$5,$6}' mc/prefiltered_func_data_mcf.par > motion6.txt
 
 # get the first 5 principal components from the eroded WM and CSF masks
 fslmeants -i fmri_preproc.nii.gz -m wm_mask_ero.nii.gz --eig --order 5 -o wm_compcor.txt
