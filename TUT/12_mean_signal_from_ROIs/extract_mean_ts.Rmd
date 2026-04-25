@@ -1,0 +1,57 @@
+---
+title: "Extract mean ts"
+author: "LC"
+date: "2026-04-25"
+output: html_document
+---
+
+```{r, message=FALSE}
+library(RNifti)
+library(tibble)
+library(tidyverse)
+library(readr)
+library(tictoc)
+```
+
+
+```{r}
+extract_meants <- function(fmri_file, atlas_file, labels_file) {
+
+  # load data
+  fmri  <- readNifti(fmri_file)   # X x Y x Z x T
+  atlas <- readNifti(atlas_file)  # X x Y x Z
+
+  stopifnot(identical(dim(fmri)[1:3], dim(atlas)))
+
+  # labels (expects columns: index, name)
+  labels <- readr::read_tsv(labels_file, show_col_types = FALSE) %>%
+    select(index, name)
+
+  T <- dim(fmri)[4]
+
+  out <- purrr::map_dfc(labels$index, function(idx) {
+    mask <- atlas == idx
+    if (!any(mask)) return(rep(NA_real_, T))
+    colMeans(matrix(fmri[mask], ncol = T))
+  })
+
+  colnames(out) <- labels$name
+
+  as_tibble(out)
+}
+
+```
+
+
+
+```{r}
+
+ts <- extract_meants(
+  fmri_file  = "fmri.nii.gz",
+  atlas_file = "atlas.nii.gz",
+  labels_file = "labels.tsv"
+)
+
+ts
+```
+

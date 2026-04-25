@@ -1,0 +1,5 @@
+original_names.txt
+
+fmri.nii.gz  : sub-gutsaumc0010_ses-01_task-rest_space-MNI152NLin2009cAsym_res-2_desc-denoised_bold.nii.gz
+labels.tsv   : tpl-MNI152NLin2009cAsym_atlas-Schaefer2018_desc-200Parcels7Networks_dseg.tsv
+atlas.nii.gz : tpl-MNI152NLin2009cAsym_res-02_atlas-Schaefer2018_desc-200Parcels7Networks_dseg.nii.gz
