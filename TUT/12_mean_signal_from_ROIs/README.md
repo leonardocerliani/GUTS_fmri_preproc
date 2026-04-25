@@ -30,7 +30,7 @@ In the following there are three different implementations of the same functiona
 
 Depending on how you will use the resulting table of averaged time courses, you can decide to use the one that is most useful for you. 
 
-The following examples use volumes and labels from Templateflow. The original disproportionately long filenames are in the `original_names.txt`. The `fmri.nii.gz` is just a toy sample with 20 volumes in 1bit format (to make it suitable for github).
+The following examples use volumes and labels from Templateflow. The original disproportionately long filenames are in the `original_names.txt`. The `fmri.nii.gz` is just a toy sample with 50 volumes (to make it suitable for github).
 
 ## The minimalist: fslmeants
 It has the advantage of being very concise (and fast!) and therefore easy to parallelize in bash with `xargs`. The drawback is that the final tsv file does not have labels as headers (notice that no labels.txt/tsv file is passed as input).
@@ -115,6 +115,11 @@ If you understand a bit of fmri data or fmri data analysis and are mindful about
 A minimal pipeline is the following, assuming you already have your data preprocessed with fsl feat (which again unfortunately requires very concise scripting efforts).
 
 ```
+# fd (before mcflirt)
+fsl_motion_outliers -i fmri -m mask.nii.gz --fd -s fd.txt -o fd_4scrub.txt
+
+# do feat preprocessing and then get the files from the .feat directory
+
 # get the motion parameters from the feat preproc output
 awk '{print $1,$2,$3,$4,$5,$6}' motion.par > motion6.txt
 
@@ -122,11 +127,22 @@ awk '{print $1,$2,$3,$4,$5,$6}' motion.par > motion6.txt
 fslmeants -i fmri_preproc.nii.gz -m wm_mask_ero.nii.gz --eig --order 5 -o wm_compcor.txt
 fslmeants -i fmri_preproc.nii.gz -m csf_mask_ero.nii.gz --eig --order 5 -o csf_compcor.txt
 
+# dvars
+fsl_motion_outliers -i fmri -m mask.nii.gz --dvars -s dvars.txt -o dvars_4scrub.txt
+
 # global signal
 fslmeants -i fmri_preproc.nii.gz -m brain_mask.nii.gz -o global_signal.txt
 
+# created zeroed fd_4scrub.txt and dvars_4scrub.txt in case there are no spikes 
+n=$(wc -l < fd.txt)
+[ -f fd_4scrub.txt ] || yes 0 | head -n "$n" > fd_4scrub.txt
+[ -f dvars_4scrub.txt ] || yes 0 | head -n "$n" > dvars_4scrub.txt
+
 # combine everything
-paste motion6.txt wm_compcor.txt csf_compcor.txt global_signal.txt > confounds.txt
+paste motion6.txt \
+  fd.txt fd_4scrub.txt \
+  dvars.txt dvars_4scrub.txt  \
+  wm_compcor.txt csf_compcor.txt global_signal.txt > confounds.txt
 ```
 
 You still need to compute the derivatives of the motion parameters, but hey, that's just an `np.diff(x, axis=0)`.
