@@ -107,7 +107,7 @@ ts <- extract_meants(
 )
 ```
 
-## Bonus - get the fmriprep confounds using fsl
+## Bonus - get the fmriprep* confounds using fsl
 fmriprep is great! You give fmri data, and without knowing _anything_ about fmri data or fmri data analysis you can get a lot of stuff to fill up your disk space in just 6 hours of intense computing power! For instance the confounds you can add to your glm matrix, or use to denoise your data before running analyses like ISC.
 
 If you understand a bit of fmri data or fmri data analysis and are mindful about burning trees, you can instead using fsl utilities. The drawback is that your scripts will be extremely simple and therefore you will not be able to impress your peers or your PI with thousands of lines of code.
@@ -128,12 +128,12 @@ fslmeants -i fmri_preproc.nii.gz -m wm_mask_ero.nii.gz --eig --order 5 -o wm_com
 fslmeants -i fmri_preproc.nii.gz -m csf_mask_ero.nii.gz --eig --order 5 -o csf_compcor.txt
 
 # dvars
-fsl_motion_outliers -i fmri -m mask.nii.gz --dvars -s dvars.txt -o dvars_4scrub.txt
+fsl_motion_outliers -i fmri_preproc -m mask.nii.gz --dvars -s dvars.txt -o dvars_4scrub.txt
 
 # global signal
 fslmeants -i fmri_preproc.nii.gz -m brain_mask.nii.gz -o global_signal.txt
 
-# created zeroed fd_4scrub.txt and dvars_4scrub.txt in case there are no spikes 
+# generate zeroed fd_4scrub.txt and dvars_4scrub.txt in case there are no spikes 
 n=$(wc -l < fd.txt)
 [ -f fd_4scrub.txt ] || yes 0 | head -n "$n" > fd_4scrub.txt
 [ -f dvars_4scrub.txt ] || yes 0 | head -n "$n" > dvars_4scrub.txt
@@ -147,3 +147,4 @@ paste motion6.txt \
 
 You still need to compute the derivatives of the motion parameters, but hey, that's just an `np.diff(x, axis=0)`.
 
+\* The obtained confounds might not be _exactly_ the same you would obtain with fmriprep on the same data. Is that a problem?
