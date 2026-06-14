@@ -1,0 +1,26 @@
+services:
+
+  caddy:
+    image: caddy:latest
+    ports:
+      - "8998:8998"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./launcher:/srv
+    depends_on:
+      - pca
+      - dimred
+      - explore
+    restart: unless-stopped
+
+  pca:
+    build: ./app-pca
+    restart: unless-stopped
+
+  dimred:
+    build: ./app-dimred
+    restart: unless-stopped
+
+  explore:
+    build: ./app-data-exploration
+    restart: unless-stopped

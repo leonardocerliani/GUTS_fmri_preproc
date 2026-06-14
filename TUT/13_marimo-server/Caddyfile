@@ -1,0 +1,22 @@
+:8998 {
+
+    handle /pca/* {
+        uri strip_prefix /pca
+        reverse_proxy pca:8080
+    }
+
+    handle /dimred/* {
+        uri strip_prefix /dimred
+        reverse_proxy dimred:8080
+    }
+
+    handle /explore/* {
+        uri strip_prefix /explore
+        reverse_proxy explore:8080
+    }
+
+    handle {
+        root * /srv
+        file_server
+    }
+}
